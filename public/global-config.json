@@ -1,0 +1,7 @@
+{
+  "status": "200",
+  "BASE_URL": "http://122.112.211.21:8080/apis",
+  "IMG_URL": "http://122.112.211.21/static/upload/",
+  "UPLOADURL": "http://122.112.211.21/api/upload",
+  "AJAX_TIMEOUT": "40000"
+}
