@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-      <h3 class="title">邦达通物流管理系统</h3>
+      <h3 class="title">旭彩净水器管理系统</h3>
       <el-form-item prop="username">
         <el-input placeholder="请输入用户名" v-model="loginForm.username" autoComplete="off">
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
