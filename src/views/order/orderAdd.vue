@@ -224,6 +224,7 @@
           </div>
         </div>
       </div>
+
       <div class="order-editor-goods">
         <div class="goods-list">
           <el-table
@@ -394,6 +395,7 @@
           </div>
         </div>
       </div>
+
       <div class="order-editor-extra">
         <div>
           <div class="layui-form-item">
@@ -642,77 +644,19 @@
       </div>
 
       <!--ceshi-->
-      <el-form-item
-        v-for="(domain, index) in goodsTableHead"
-        :key="domain.key"
-        :prop="'domains.' + index + '.value'">v
-        <div class="order-editor-fee">
-          <div class="order-editor-freight">
-            <h3><label class="fn-label">合计运费</label></h3>
-            <div>
-              <label class="layui-form-label freight">运费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.yunfei" type="text" class="layui-input"/>
-              </div>
+      <div v-for="(item, indexs) in goodsTableHeads" :key="indexs" class="order-editor-fee">
+        <el-form-item
+          v-for="(domain, index) in item.goodsTableHead"
+          :key="domain.property"
+          :prop="'domains.' + index + '.value'">
+          <div>
+            <label class="layui-form-label freight">{{domain.label}}</label>
+            <div class="layui-block">
+              <input v-model="domain.value" type="text" class="layui-input"/>
             </div>
-            <div>
-              <label class="layui-form-label freight">现返</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.xianfan" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">欠返</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.qianfan" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">送货费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.songhuofei" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">提货费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.tihuofei" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">装卸费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.zhangxiefei" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">声明价值</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.shenmingjiazhi" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">保价费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.baojiafei" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">包装费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.baozhuangfei" type="text" class="layui-input"/>
-              </div>
-            </div>
-            <div>
-              <label class="layui-form-label freight">其它费</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.qitafei" type="text" class="layui-input"/>
-              </div>
-            </div>
-
           </div>
-        </div>
-      </el-form-item>
+        </el-form-item>
+      </div>
 
     </el-form>
 
@@ -902,11 +846,84 @@
             property: "name"
           }
         ],
+        goodsTableHeads: [
+          {
+            goodsTableHead: [
+              {
+                label: "货物名称",
+                placeholder: '',
+                property: "name",
+                value: 1111
+              },
+              {
+                label: "包装",
+                placeholder: '',
+                property: "packing"
+              },
+              {
+                label: "件数",
+                placeholder: '',
+                property: "quantity"
+              },
+              {
+                label: "重量(kg)",
+                placeholder: '',
+                property: "weight"
+              },
+              {
+                label: "体积(方)",
+                placeholder: '长*宽*高*件数(米)',
+                property: "volume"
+              },
+              {
+                label: "单价",
+                placeholder: '',
+                property: "unitPrice"
+              }
+            ],
+          },
+          {
+            goodsTableHead: [
+              {
+                label: "货物名称",
+                placeholder: '',
+                property: "name",
+                value: 2222
+              },
+              {
+                label: "包装",
+                placeholder: '',
+                property: "packing"
+              },
+              {
+                label: "件数",
+                placeholder: '',
+                property: "quantity"
+              },
+              {
+                label: "重量(kg)",
+                placeholder: '',
+                property: "weight"
+              },
+              {
+                label: "体积(方)",
+                placeholder: '长*宽*高*件数(米)',
+                property: "volume"
+              },
+              {
+                label: "单价",
+                placeholder: '',
+                property: "unitPrice"
+              }
+            ],
+          }
+        ],
         goodsTableHead: [
           {
             label: "货物名称",
             placeholder: '',
-            property: "name"
+            property: "name",
+            value: 1111
           },
           {
             label: "包装",
@@ -1395,6 +1412,7 @@
       },
       // 提交
       submitForm () {
+        console.log(this.goodsTableHead)
         this.btnSaveLoading = true
         this.$validator.validateAll().then((result) => {
           if (result) {
