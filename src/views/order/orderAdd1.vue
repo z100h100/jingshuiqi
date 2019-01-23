@@ -1,24 +1,24 @@
 <template>
   <div class="app-container" style="min-width: 1024px;">
-    <el-form ref="ruleForm" :model="ruleForm">
+    <el-form ref="ruleForm" :model="ruleForm" :rules="rules_system">
       <div class="consignment">
         <div class="consignmentOpen">
           <div class="layui-form-item fr waybillNoClass">
-            <label class="order-no-style">订单编号</label>
+            <label class="layui-form-label requireClass">运单号</label>
             <div class="layui-block" style="width: 160px">
-              <input v-model="ruleForm.orderNo" v-validate="'required|orderNo'"
+              <input v-model="ruleForm.waybillNo" v-validate="'required|waybillNo'"
                      autocomplete="off"
-                     :class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"
-                     class="layui-input" placeholder="订单编号">
-              <el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">
-                <i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>
+                     :class="{'input': true, 'is-danger': errors.has('waybillNo')}" type="text" name="waybillNo"
+                     class="layui-input" placeholder="运单号">
+              <el-tooltip class="item" effect="pink" :content="errors.first('waybillNo')" placement="top">
+                <i v-show="errors.has('waybillNo')" class="el-icon-warning errClass" v-cloak></i>
               </el-tooltip>
             </div>
           </div>
         </div>
-        <div class="consignmentTitle">客户管理表</div>
+        <div class="consignmentTitle">货物托运单</div>
         <div class="consignmentInfo">
-          <el-form-item label="" prop="waybillDate" class="orderContentRight fr">
+          <el-form-item label="开单时间" prop="waybillDate" class="orderContentRight fr">
             <el-date-picker
               v-model="ruleForm.waybillDate"
               type="datetime"
@@ -36,52 +36,33 @@
         </div>
       </div>
       <!--表单内容-->
-      <div class="title-style">
-        <span>客户信息</span>
-      </div>
       <div class="order-content skin-border">
         <div class="order-editor-traffic">
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">所属地区</label>
+              <label class="layui-form-label">发站</label>
               <div class="layui-block">
-                <input v-model="ruleForm.area" class="layui-input" placeholder="所属地区">
+                <input v-model="ruleForm.departureStation" class="layui-input" placeholder="发站">
               </div>
             </div>
           </div>
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">客户类型</label>
+              <label class="layui-form-label">到站</label>
               <div class="layui-block">
-                <input v-model="ruleForm.customerType" class="layui-input" placeholder="客户类型">
+                <input v-model="ruleForm.arriveStation" class="layui-input" placeholder="到站">
               </div>
             </div>
           </div>
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">客户名称</label>
+              <label class="layui-form-label">路由</label>
               <div class="layui-block">
-                <input v-model="ruleForm.customerName" class="layui-input" placeholder="客户名称">
+                <input v-model="ruleForm.transferStation" class="layui-input" placeholder="路由">
               </div>
             </div>
           </div>
           <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">联系人</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.person" class="layui-input" placeholder="联系人">
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">联系电话</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.personPhone" class="layui-input" placeholder="联系电话">
-              </div>
-            </div>
-          </div>
-          <!--<div>
             <div class="layui-form-item">
               <label class="layui-form-label requireClass">送货方式</label>
               <div class="layui-block">
@@ -99,33 +80,151 @@
                 </el-tooltip>
               </div>
             </div>
-          </div>-->
+          </div>
         </div>
       </div>
-      <div class="order-content skin-border">
-        <div class="order-editor-traffic">
+
+      <div class="order-editor-person">
+        <div class="order-editor-consignor">
           <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">安装地址</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.address" class="layui-input" placeholder="安装地址">
-              </div>
+            <div>
+              <i class="fn-icon fn-icon-avtor"></i>
+              <p>发货方</p>
             </div>
           </div>
           <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">备注</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.remark" class="layui-input" placeholder="备注">
+            <div class="cor-company">
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label">发货单位</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.deliveryCompany" class="layui-input" placeholder="发货单位">
+                </div>
+              </div>
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label requireClass">发货人</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.deliveryPerson" v-validate="'required'"
+                         autocomplete="off"
+                         :class="{'input': true, 'is-danger': errors.has('deliveryPerson')}"
+                         type="text" name="deliveryPerson" class="layui-input" placeholder="发货人" @click="deliveryPerson=!deliveryPerson" @input="deliveryPersonChange">
+                  <selectList
+                    v-show="deliveryPerson"
+                    :list="deliveryPersonList"
+                    @value1="selectValueHandle"
+                  ></selectList>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('deliveryPerson')" placement="top">
+                    <i v-show="errors.has('deliveryPerson')" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+            </div>
+            <div class="cor-company">
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label requireClass">手机号码</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.deliveryPhone" v-validate="'required|phone'"
+                         autocomplete="off"
+                         detect-change="off"
+                         initial='off'
+                         :class="{'input': true, 'is-danger': errors.has('deliveryPhone')}"
+                         type="text" name="deliveryPhone" class="layui-input" placeholder="手机号码">
+                  <el-tooltip class="item" effect="pink" :content="errors.first('deliveryPhone')" placement="top">
+                    <i v-show="errors.has('deliveryPhone')" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label">电话号码</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.deliveryTel" type="text" class="layui-input" placeholder="电话号码">
+                </div>
+              </div>
+            </div>
+            <div class="cor-company">
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label">发货地址</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.shippingAddress" type="text" class="layui-input" placeholder="发货地址">
+                </div>
+              </div>
+              <div class="layui-form-item cor-company">
+                <div class="layui-block">
+                  <input v-model="ruleForm.shippingAddressRemark" type="text" class="layui-input" placeholder="地址备注">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="order-editor-consignee">
+          <div>
+            <div>
+              <i class="fn-icon fn-icon-avtor"></i>
+              <p>收货方</p>
+            </div>
+          </div>
+          <div>
+            <div class="cor-company">
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label">收货单位</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.receivingCompany" type="text" class="layui-input" placeholder="收货单位">
+                </div>
+              </div>
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label requireClass">收货人</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.receivingPerson" v-validate="'required'"
+                         autocomplete="off"
+                         :class="{'input': true, 'is-danger': errors.has('receivingPerson')}"
+                         type="text" name="receivingPerson" class="layui-input" placeholder="收货人" @click="receivingPerson=!receivingPerson" @input="receivingPersonChange">
+                  <selectList
+                    v-show="receivingPerson"
+                    :list="receivingPersonList"
+                    @value1="selectReceivingValueHandle"
+                  ></selectList>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('receivingPerson')" placement="top">
+                    <i v-show="errors.has('receivingPerson')" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+            </div>
+            <div class="cor-company">
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label requireClass">手机号码</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.receivingPhone" v-validate="'required|phone'"
+                         autocomplete="off"
+                         :class="{'input': true, 'is-danger': errors.has('receivingPhone')}"
+                         type="text" name="receivingPhone" class="layui-input" placeholder="手机号码">
+                  <el-tooltip class="item" effect="pink" :content="errors.first('receivingPhone')" placement="top">
+                    <i v-show="errors.has('receivingPhone')" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label">电话号码</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.receivingTel" type="text" class="layui-input" placeholder="电话号码">
+                </div>
+              </div>
+            </div>
+            <div class="cor-company">
+              <div class="layui-form-item cor-company">
+                <label class="layui-form-label">收货地址</label>
+                <div class="layui-block">
+                  <input v-model="ruleForm.receivingAddress" type="text" class="layui-input" placeholder="收货地址">
+                </div>
+              </div>
+              <div class="layui-form-item cor-company">
+                <div class="layui-block">
+                  <input v-model="ruleForm.receivingAddressRemark" type="text" class="layui-input" placeholder="地址备注">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="title-style">
-        <span>产品内容</span>
-      </div>
       <div class="order-editor-goods">
         <div class="goods-list">
           <el-table
@@ -136,89 +235,17 @@
             width="100%">
             <el-table-column width="35" type="index">
               <template slot-scope="scope">
-                <i class="el-icon-plus" v-if="scope.$index== 0" @click="addGoodsList"></i>
+                <i class="el-icon-plus" v-if="scope.$index== 0" @click="addGoodsList">#</i>
                 <i class="el-icon-minus" v-else @click="delGoodsList(scope.$index)"></i>
               </template>
             </el-table-column>
             <el-table-column v-for="item in goodsTableHead" :label="item.label" :property="item.property" min-width="150">
               <template slot-scope="scope">
-                <div class="layui-form-item" v-if="item.label === '经办人'">
+                <div class="layui-form-item" v-if="item.label === '件数'">
                   <label class="layui-form-label">{{item.label}}</label>
                   <div class="layui-block">
-                    <select v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                            :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                            :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                    >
-                      <option
-                        v-for="(item, index) in allUserList"
-                        :key="index"
-                        :label="item.username"
-                        :value="item">
-                      </option>
-                    </select>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item" v-else-if="item.label === '服务类型'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <select v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                            :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                            :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                    >
-                      <option
-                        v-for="item in statusList"
-                        :key="item.code"
-                        :label="item.name"
-                        :value="item.code">
-                      </option>
-                    </select>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item" v-else-if="item.label === '安装时间'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <el-date-picker
-                      v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                      :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                      :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                      type="datetime"
-                      :clearable="false"
-                      :editable="false"
-                      placeholder="选择日期时间"
-                      align="right"
-                      :picker-options="pickerOptions1"
-                      size="mini"
-                      value-format="timestamp"
-                      style="width:200px">
-                    </el-date-picker>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item" v-else-if="item.label === '更换时间'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <el-date-picker
-                      v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                      :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                      :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                      type="datetime"
-                      :clearable="false"
-                      :editable="false"
-                      placeholder="选择日期时间"
-                      align="right"
-                      :picker-options="pickerOptions1"
-                      size="mini"
-                      value-format="timestamp"
-                      style="width:200px">
-                    </el-date-picker>
+                    <input type="number" v-model="scope.row[scope.column.property]" v-validate="'required|quantity'" :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
+                           :name="scope.column.property + scope.$index" class="layui-input" :placeholder="item.placeholder"/>
                     <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
                       <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
                     </el-tooltip>
@@ -240,7 +267,7 @@
         </div>
       </div>
 
-      <!--<div class="order-editor-fee">
+      <div class="order-editor-fee">
         <div class="order-editor-freight">
           <h3><label class="fn-label">合计运费</label></h3>
           <div>
@@ -418,7 +445,7 @@
           </div>
         </div>
       </div>
-      &lt;!&ndash;中转信息&ndash;&gt;
+      <!--中转信息-->
       <div class="order-editor-info plain create">
         <div class="order-card full">
           <h3><i class="fn-icon fn-icon-carry-out"></i>中转信息</h3>
@@ -452,7 +479,7 @@
             </el-table-column>
             <el-table-column label="承运商" prop="" min-width="150" align="center">
               <template slot-scope="scope">
-                &lt;!&ndash;<div class="layui-form-item">&ndash;&gt;
+                <!--<div class="layui-form-item">-->
                 <div class="layui-block">
                   <input v-model="ruleForm.cys"
                          autocomplete="off"
@@ -469,7 +496,7 @@
                     @value1="selectCysValueHandle"
                   ></selectList>
                 </div>
-                &lt;!&ndash;</div>&ndash;&gt;
+                <!--</div>-->
               </template>
             </el-table-column>
             <el-table-column label="承运商手机号" min-width="150" align="center">
@@ -616,7 +643,7 @@
         </div>
       </div>
 
-      &lt;!&ndash;ceshi&ndash;&gt;
+      <!--ceshi-->
       <div v-for="(item, indexs) in goodsTableHeads" :key="indexs" class="order-editor-fee">
         <el-form-item
           v-for="(domain, index) in item.goodsTableHead"
@@ -629,7 +656,7 @@
             </div>
           </div>
         </el-form-item>
-      </div>-->
+      </div>
 
     </el-form>
 
@@ -685,105 +712,361 @@
         // cys
         cys: false,
         cysList: [],
-        goodsTableHead: [
+        huidanList: [
           {
-            label: "产品名称",
+            name: '回单',
+            code: '0'
+          },
+          {
+            name: '电子回单',
+            code: '1'
+          },
+          {
+            name: '回执',
+            code: '2'
+          },
+          {
+            name: '原单',
+            code: '3'
+          },
+          {
+            name: '收条',
+            code: '4'
+          },
+          {
+            name: '信封',
+            code: '5'
+          }
+        ],
+        zzInfoTableData: [{}],
+        zzInfoTableHead: [
+          {
+            label: "中转类型",
             placeholder: '',
             property: "name"
           },
           {
-            label: "型号",
+            label: "中转单号",
             placeholder: '',
-            property: "version"
+            property: "name"
           },
           {
-            label: "数量",
+            label: "承运商",
             placeholder: '',
-            property: "number"
+            property: "name"
           },
           {
-            label: "安装时间",
+            label: "承运商手机号",
             placeholder: '',
-            property: "installTime"
+            property: "name"
           },
           {
-            label: "更换时间",
+            label: "中转到站",
             placeholder: '',
-            property: "replaceTime"
+            property: "name"
           },
           {
-            label: "服务类型",
+            label: "中转到站业务电话",
             placeholder: '',
-            property: "serviceType"
+            property: "name"
           },
           {
-            label: "售价",
+            label: "交接方式",
             placeholder: '',
-            property: "price"
+            property: "name"
           },
           {
-            label: "进价",
+            label: "承运经办人",
             placeholder: '',
-            property: "costPrice"
+            property: "name"
           },
           {
-            label: "配件",
+            label: "核定中转费",
             placeholder: '',
-            property: "parts"
+            property: "name"
           },
           {
-            label: "人工",
+            label: "中转费",
             placeholder: '',
-            property: "personCost"
+            property: "name"
           },
           {
-            label: "获利",
+            label: "付款方式",
             placeholder: '',
-            property: "profits"
+            property: "name"
           },
           {
-            label: "经办人",
+            label: "中转返款",
             placeholder: '',
-            property: "operator"
+            property: "name"
           },
           {
-            label: "维护内容与描述",
+            label: "中转费合计",
             placeholder: '',
-            property: "description"
+            property: "name"
           },
           {
-            label: "备注",
+            label: "中转现付",
             placeholder: '',
-            property: "remark"
+            property: "name"
+          },
+          {
+            label: "中转到付",
+            placeholder: '',
+            property: "name"
+          },
+          {
+            label: "中转回付",
+            placeholder: '',
+            property: "name"
+          },
+          {
+            label: "中转月结",
+            placeholder: '',
+            property: "name"
+          },
+          {
+            label: "中转欠付",
+            placeholder: '',
+            property: "name"
+          },
+          {
+            label: "中转货款扣",
+            placeholder: '',
+            property: "name"
+          },
+          {
+            label: "中转货到打卡",
+            placeholder: '',
+            property: "name"
+          },
+          {
+            label: "中转备注",
+            placeholder: '',
+            property: "name"
+          }
+        ],
+        goodsTableHeads: [
+          {
+            goodsTableHead: [
+              {
+                label: "货物名称",
+                placeholder: '',
+                property: "name",
+                value: 1111
+              },
+              {
+                label: "包装",
+                placeholder: '',
+                property: "packing"
+              },
+              {
+                label: "件数",
+                placeholder: '',
+                property: "quantity"
+              },
+              {
+                label: "重量(kg)",
+                placeholder: '',
+                property: "weight"
+              },
+              {
+                label: "体积(方)",
+                placeholder: '长*宽*高*件数(米)',
+                property: "volume"
+              },
+              {
+                label: "单价",
+                placeholder: '',
+                property: "unitPrice"
+              }
+            ],
+          },
+          {
+            goodsTableHead: [
+              {
+                label: "货物名称",
+                placeholder: '',
+                property: "name",
+                value: 2222
+              },
+              {
+                label: "包装",
+                placeholder: '',
+                property: "packing"
+              },
+              {
+                label: "件数",
+                placeholder: '',
+                property: "quantity"
+              },
+              {
+                label: "重量(kg)",
+                placeholder: '',
+                property: "weight"
+              },
+              {
+                label: "体积(方)",
+                placeholder: '长*宽*高*件数(米)',
+                property: "volume"
+              },
+              {
+                label: "单价",
+                placeholder: '',
+                property: "unitPrice"
+              }
+            ],
+          }
+        ],
+        goodsTableHead: [
+          {
+            label: "货物名称",
+            placeholder: '',
+            property: "name",
+            value: 1111
+          },
+          {
+            label: "包装",
+            placeholder: '',
+            property: "packing"
+          },
+          {
+            label: "件数",
+            placeholder: '',
+            property: "quantity"
+          },
+          {
+            label: "重量(kg)",
+            placeholder: '',
+            property: "weight"
+          },
+          {
+            label: "体积(方)",
+            placeholder: '长*宽*高*件数(米)',
+            property: "volume"
+          },
+          {
+            label: "单价",
+            placeholder: '',
+            property: "unitPrice"
           }
         ],
         // 数据值
         goodsTableData: [
           {
-            costPrice: 0,
-            description: '',
-            id: 0,
-            installTime: '',
-            model: '',
-            name: '',
-            number: 0,
-            operator: {
-            },
-            parts: 0,
-            personCost: 0,
-            price: 0,
-            profits: 0,
-            remark:'',
-            replaceTime: '',
-            serviceType: 0,
-            version: 0
+            name: "",
+            packing: "",
+            quantity: "",
+            weight: "",
+            volume: "",
+            unitPrice: ""
           }
         ],
         name: '',
         statusList: [
           {
-            name: '安装',
+            name: '已入库',
             code: '0'
+          },
+          {
+            name: '短驳中',
+            code: '1'
+          },
+          {
+            name: '已装车',
+            code: '2'
+          },
+          {
+            name: '已发车',
+            code: '3'
+          },
+          {
+            name: '已到达',
+            code: '4'
+          },
+          {
+            name: '已卸车',
+            code: '5'
+          },
+          {
+            name: '中转中',
+            code: '6'
+          },
+          {
+            name: '已接收',
+            code: '7'
+          },
+          {
+            name: '送货中',
+            code: '8'
+          },
+          {
+            name: '已送货',
+            code: '9'
+          },
+          {
+            name: '已签收',
+            code: '10'
+          },
+          {
+            name: '待补录',
+            code: '11'
+          },
+          {
+            name: '提货中',
+            code: '12'
+          },
+          {
+            name: '已提货',
+            code: '13'
+          },
+          {
+            name: '网点中转中',
+            code: '14'
+          },
+          {
+            name: '网点中转已接收',
+            code: '15'
+          },
+          {
+            name: '预装车',
+            code: '16'
+          },
+          {
+            name: '部分短驳中',
+            code: '17'
+          },
+          {
+            name: '部分短驳完成',
+            code: '18'
+          },
+          {
+            name: '部分装车',
+            code: '19'
+          },
+          {
+            name: '部分发车',
+            code: '20'
+          },
+          {
+            name: '部分到达',
+            code: '21'
+          },
+          {
+            name: '部分送货中',
+            code: '22'
+          },
+          {
+            name: '部分送货完成',
+            code: '23'
+          },
+          {
+            name: '部分签收',
+            code: '24'
+          },
+          {
+            name: '部分入库',
+            code: '25'
           }
         ],
         dialogVisible: false,
@@ -830,15 +1113,6 @@
           }
         ],
         ruleForm: {
-          orderNo: '',
-          area: '',
-          customerType:'',
-          customerName: '',
-          person: '',
-          personPhone: '',
-          remark: '',
-          address: '',
-
           waybillDate: new Date(),
           deliveryPerson: '',
           receivingPerson: '',
@@ -847,35 +1121,35 @@
           huidan: '0',
           huidanfen: 0
         },
-        // rules_system: {
-        //   waybillNo: [
-        //     {required: true, message: '请输入运单号', trigger: 'blur'}
-        //   ],
-        //   operator: [
-        //     {required: true, message: '请输入经办人', trigger: 'blur'}
-        //   ],
-        //   receivingPhone: [
-        //     {required: true, validator: checkPhone, trigger: 'blur'}
-        //   ],
-        //   deliveryPhone: [
-        //     {required: true, validator: checkPhone, trigger: 'blur'}
-        //   ],
-        //   deliveryMode: [
-        //     {required: true, message: '请选择送货方式', trigger: 'change'}
-        //   ],
-        //   payment: [
-        //     {required: true, message: '请选择付款方式', trigger: 'change'}
-        //   ],
-        //   deliveryPerson: [
-        //     {required: true, message: '请输入发货人', trigger: 'blur'}
-        //   ],
-        //   receivingPerson: [
-        //     {required: true, message: '请输入收货人', trigger: 'blur'}
-        //   ],
-        //   quantity: [
-        //     {required: true, message: '请输入件数', trigger: 'blur'}
-        //   ],
-        // },
+        rules_system: {
+          waybillNo: [
+            {required: true, message: '请输入运单号', trigger: 'blur'}
+          ],
+          operator: [
+            {required: true, message: '请输入经办人', trigger: 'blur'}
+          ],
+          receivingPhone: [
+            {required: true, validator: checkPhone, trigger: 'blur'}
+          ],
+          deliveryPhone: [
+            {required: true, validator: checkPhone, trigger: 'blur'}
+          ],
+          deliveryMode: [
+            {required: true, message: '请选择送货方式', trigger: 'change'}
+          ],
+          payment: [
+            {required: true, message: '请选择付款方式', trigger: 'change'}
+          ],
+          deliveryPerson: [
+            {required: true, message: '请输入发货人', trigger: 'blur'}
+          ],
+          receivingPerson: [
+            {required: true, message: '请输入收货人', trigger: 'blur'}
+          ],
+          quantity: [
+            {required: true, message: '请输入件数', trigger: 'blur'}
+          ],
+        },
         payMode: [
           {
             name: '现付',
@@ -975,7 +1249,6 @@
       }
     },
     mounted () {
-      // this.getCustomerListMethod()
       this.multipleSelection = [this.tableData[0], this.tableData[1]]
       this.getAllUser()
     },
@@ -1002,26 +1275,13 @@
     },
     methods: {
       ...mapActions([
-        'getCustomerSave',
-        'getCustomerList',
-
+        'getWaybillSave',
         'getWaybillSaveSMS',
         'getSMS',
         'getWaybillPhone',
         'getWaybillNoDuplicate',
         'getUserAllUser'
       ]),
-      // 获取订单数据
-      getCustomerListMethod () {
-        let params = Object.assign({id: ''})
-        this.getCustomerList(params).then(res => {
-          if (res.data && res.data.result) {
-            let data = res.data.result
-            this.goodsTableData = data.products
-            this.ruleForm = data.data
-          }
-        })
-      },
       // 发货人
       selectValueHandle(value){
         this.deliveryPerson = false
@@ -1073,23 +1333,12 @@
       },
       addGoodsList () {
         this.goodsTableData.push({
-          costPrice: 0,
-          description: '',
-          id: 0,
-          installTime: '',
-          model: '',
-          name: '',
-          number: 0,
-          operator: {
-          },
-          parts: 0,
-          personCost: 0,
-          price: 0,
-          profits: 0,
-          remark:'',
-          replaceTime: '',
-          serviceType: 0,
-          version: 0
+          name: "",
+          packing: "",
+          quantity: "",
+          weight: "",
+          volume: "",
+          unitPrice: ""
         })
       },
       delGoodsList (index) {
@@ -1163,70 +1412,43 @@
       },
       // 提交
       submitForm () {
+        console.log(this.goodsTableHead)
+        console.log(this.goodsTableData)
         this.btnSaveLoading = true
-
-        let params = Object.assign({}, this.ruleForm)
-        params.waybillDate = new Date(this.ruleForm.waybillDate).getTime()
-        params.operator = {
-          id: params.operator
-        }
-        params.products = this.goodsTableData
-        this.getCustormerSave(params).then(res => {
-          // let _params = {
-          //   deliverySms: params.deliverySms,
-          //   receiveSms: params.receiveSms,
-          //   id: res.data.data
-          // }
-          // this.getWaybillSaveSMS(_params).then(() => {
-          //   this.$message({
-          //     type: 'success',
-          //     message: '保存成功'
-          //   })
-          //   this.$router.push({name: 'orderList'})
-          // })
-          this.$message({
-            type: 'success',
-            message: '保存成功'
-          })
-          this.$router.push({name: 'orderList'})
-        }).catch(() => {
-          this.btnSaveLoading = false
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            let params = Object.assign({}, this.ruleForm)
+            params.waybillDate = new Date(this.ruleForm.waybillDate).getTime()
+            params.operator = {
+              id: params.operator
+            }
+            params.goods = this.goodsTableData
+            this.getWaybillSave(params).then(res => {
+              // let _params = {
+              //   deliverySms: params.deliverySms,
+              //   receiveSms: params.receiveSms,
+              //   id: res.data.data
+              // }
+              // this.getWaybillSaveSMS(_params).then(() => {
+              //   this.$message({
+              //     type: 'success',
+              //     message: '保存成功'
+              //   })
+              //   this.$router.push({name: 'orderList'})
+              // })
+              this.$message({
+                type: 'success',
+                message: '保存成功'
+              })
+              this.$router.push({name: 'orderList'})
+            }).catch(() => {
+              this.btnSaveLoading = false
+            })
+          } else {
+            this.btnSaveLoading = false
+            return false
+          }
         })
-
-        // this.$validator.validateAll().then((result) => {
-        //   if (result) {
-        //     let params = Object.assign({}, this.ruleForm)
-        //     params.waybillDate = new Date(this.ruleForm.waybillDate).getTime()
-        //     params.operator = {
-        //       id: params.operator
-        //     }
-        //     params.products = this.goodsTableData
-        //     this.getCustormerSave(params).then(res => {
-        //       // let _params = {
-        //       //   deliverySms: params.deliverySms,
-        //       //   receiveSms: params.receiveSms,
-        //       //   id: res.data.data
-        //       // }
-        //       // this.getWaybillSaveSMS(_params).then(() => {
-        //       //   this.$message({
-        //       //     type: 'success',
-        //       //     message: '保存成功'
-        //       //   })
-        //       //   this.$router.push({name: 'orderList'})
-        //       // })
-        //       this.$message({
-        //         type: 'success',
-        //         message: '保存成功'
-        //       })
-        //       this.$router.push({name: 'orderList'})
-        //     }).catch(() => {
-        //       this.btnSaveLoading = false
-        //     })
-        //   } else {
-        //     this.btnSaveLoading = false
-        //     return false
-        //   }
-        // })
       },
       handleShowByCancel () {
         this.$router.push({name: 'orderList'})
@@ -1237,17 +1459,6 @@
 
 
 <style lang="scss" scoped>
-  .title-style {
-    color: #ff4040;
-    margin-top: 20px;
-  }
-  .title-style span {
-    font-size: 16px;
-  }
-  .order-no-style {
-    font-size: 12px;
-    line-height: 28px;
-  }
   .order-editor-info {
     .plain {
       border-right: 0;
@@ -1381,7 +1592,9 @@
     .goods-list {
       overflow: auto;
       flex: 1;
-      border: solid 1px #78aadd;
+      border-width: 0 1px;
+      border-style: solid;
+      border-color: #78aadd;
     }
   }
   .order-editor-consignee {

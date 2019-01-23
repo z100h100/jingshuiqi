@@ -103,5 +103,12 @@ export default {
   },
   GET_WAYBILLPHONE (params) {
     return api.fetch('get', `${base}/waybill/visitingcard/name`, params)
+  },
+
+  GET_CUSTOMERSAVE (params) {
+    return api.fetch('post', `${base}/customerorder/save`, params)
+  },
+  GET_CUSTOMERLIST (params) {
+    return api.fetch('get', `${base}/customerorder/get`, params)
   }
 }

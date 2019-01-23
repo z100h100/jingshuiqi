@@ -55,5 +55,16 @@ export default {
     return getDate.GET_WAYBILLPHONE(userInfo).then(response => {
       return response
     })
+  },
+
+  getCustomerSave ({ commit }, userInfo) {
+    return getDate.GET_CUSTOMERSAVE(userInfo).then(response => {
+      return response
+    })
+  },
+  getCustomerList ({ commit }, userInfo) {
+    return getDate.GET_CUSTOMERLIST(userInfo).then(response => {
+      return response
+    })
   }
 }
