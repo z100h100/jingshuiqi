@@ -1,635 +1,146 @@
 <template>
   <div class="app-container" style="min-width: 1024px;">
     <el-form ref="ruleForm" :model="ruleForm">
-      <div class="consignment">
-        <div class="consignmentOpen">
-          <div class="layui-form-item fr waybillNoClass">
-            <label class="order-no-style">订单编号</label>
-            <div class="layui-block" style="width: 160px">
-              <input v-model="ruleForm.orderNo" v-validate="'required|orderNo'"
-                     autocomplete="off"
-                     :class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"
-                     class="layui-input" placeholder="订单编号">
-              <el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">
-                <i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>
-              </el-tooltip>
+      <!--<div class="consignment">-->
+        <!--<div class="consignmentOpen">-->
+          <!--<div class="layui-form-item fr waybillNoClass">-->
+            <!--<label class="order-no-style">订单编号</label>-->
+            <!--<div class="layui-block" style="width: 160px">-->
+              <!--<input v-model="ruleForm.orderNo" v-validate="'required|orderNo'"-->
+                     <!--autocomplete="off"-->
+                     <!--:class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"-->
+                     <!--class="layui-input" placeholder="订单编号">-->
+              <!--<el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">-->
+                <!--<i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>-->
+              <!--</el-tooltip>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="consignmentTitle">客户管理表</div>-->
+        <!--<div class="consignmentInfo">-->
+          <!--<el-form-item label="" prop="waybillDate" class="orderContentRight fr">-->
+            <!--<el-date-picker-->
+              <!--v-model="ruleForm.waybillDate"-->
+              <!--type="datetime"-->
+              <!--:clearable="false"-->
+              <!--:editable="false"-->
+              <!--placeholder="选择日期时间"-->
+              <!--align="right"-->
+              <!--class="orderInput"-->
+              <!--:picker-options="pickerOptions1"-->
+              <!--size="mini"-->
+              <!--value-format="timestamp"-->
+              <!--style="width:200px">-->
+            <!--</el-date-picker>-->
+          <!--</el-form-item>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;表单内容&ndash;&gt;-->
+      <!--<div class="title-style">-->
+        <!--<span>客户信息</span>-->
+      <!--</div>-->
+      <!--<div class="order-content skin-border">-->
+        <!--<div class="order-editor-traffic">-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">所属地区</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.area" class="layui-input" placeholder="所属地区">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">客户类型</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.customerType" class="layui-input" placeholder="客户类型">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">客户名称</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.customerName" class="layui-input" placeholder="客户名称">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">联系人</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.person" class="layui-input" placeholder="联系人">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">联系电话</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.personPhone" class="layui-input" placeholder="联系电话">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--&lt;!&ndash;<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label requireClass">送货方式</label>-->
+              <!--<div class="layui-block">-->
+                <!--<select v-model="ruleForm.deliveryMode" v-validate="'required'" name="deliveryMode" class="layui-input"-->
+                        <!--:class="{'input': true, 'is-danger': errors.has('deliveryMode')}">-->
+                  <!--<option-->
+                    <!--v-for="item in deliveryModeList"-->
+                    <!--:key="item.code"-->
+                    <!--:label="item.name"-->
+                    <!--:value="item.code">-->
+                  <!--</option>-->
+                <!--</select>-->
+                <!--<el-tooltip class="item" effect="pink" :content="errors.first('deliveryMode')" placement="top">-->
+                  <!--<i v-show="errors.has('deliveryMode')" class="el-icon-warning errClassSelect" v-cloak></i>-->
+                <!--</el-tooltip>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>&ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="order-content skin-border">-->
+        <!--<div class="order-editor-traffic">-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">安装地址</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.address" class="layui-input" placeholder="安装地址">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<div class="layui-form-item">-->
+              <!--<label class="layui-form-label">备注</label>-->
+              <!--<div class="layui-block">-->
+                <!--<input v-model="ruleForm.remark" class="layui-input" placeholder="备注">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="title-style">-->
+        <!--<span>产品内容</span>-->
+      <!--</div>-->
+      <div class="order-editor-goods">
+        <!--ceshi-->
+        <div v-for="(item, index) in goodsTableHeads" :key="index" class="order-editor-fee">
+          <el-form-item
+            v-for="(domain) in item.data"
+            :key="domain.property">
+            <div class="layui-form-item">
+              <label class="layui-form-label">{{domain.label}}</label>
+              <div class="layui-block">
+                <input v-model="domain.value" type="text" class="layui-input"/>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="consignmentTitle">客户管理表</div>
-        <div class="consignmentInfo">
-          <el-form-item label="" prop="waybillDate" class="orderContentRight fr">
-            <el-date-picker
-              v-model="ruleForm.waybillDate"
-              type="datetime"
-              :clearable="false"
-              :editable="false"
-              placeholder="选择日期时间"
-              align="right"
-              class="orderInput"
-              :picker-options="pickerOptions1"
-              size="mini"
-              value-format="timestamp"
-              style="width:200px">
-            </el-date-picker>
           </el-form-item>
         </div>
       </div>
-      <!--表单内容-->
-      <div class="title-style">
-        <span>客户信息</span>
-      </div>
-      <div class="order-content skin-border">
-        <div class="order-editor-traffic">
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">所属地区</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.area" class="layui-input" placeholder="所属地区">
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">客户类型</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.customerType" class="layui-input" placeholder="客户类型">
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">客户名称</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.customerName" class="layui-input" placeholder="客户名称">
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">联系人</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.person" class="layui-input" placeholder="联系人">
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">联系电话</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.personPhone" class="layui-input" placeholder="联系电话">
-              </div>
-            </div>
-          </div>
-          <!--<div>
-            <div class="layui-form-item">
-              <label class="layui-form-label requireClass">送货方式</label>
-              <div class="layui-block">
-                <select v-model="ruleForm.deliveryMode" v-validate="'required'" name="deliveryMode" class="layui-input"
-                        :class="{'input': true, 'is-danger': errors.has('deliveryMode')}">
-                  <option
-                    v-for="item in deliveryModeList"
-                    :key="item.code"
-                    :label="item.name"
-                    :value="item.code">
-                  </option>
-                </select>
-                <el-tooltip class="item" effect="pink" :content="errors.first('deliveryMode')" placement="top">
-                  <i v-show="errors.has('deliveryMode')" class="el-icon-warning errClassSelect" v-cloak></i>
-                </el-tooltip>
-              </div>
-            </div>
-          </div>-->
-        </div>
-      </div>
-      <div class="order-content skin-border">
-        <div class="order-editor-traffic">
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">安装地址</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.address" class="layui-input" placeholder="安装地址">
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">备注</label>
-              <div class="layui-block">
-                <input v-model="ruleForm.remark" class="layui-input" placeholder="备注">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="title-style">
-        <span>产品内容</span>
-      </div>
-      <div class="order-editor-goods">
-        <div class="goods-list">
-          <el-table
-            :data="goodsTableData"
-            class="tb-edit"
-            :show-header="false"
-            border
-            width="100%">
-            <el-table-column width="35" type="index">
-              <template slot-scope="scope">
-                <i class="el-icon-plus" v-if="scope.$index== 0" @click="addGoodsList"></i>
-                <i class="el-icon-minus" v-else @click="delGoodsList(scope.$index)"></i>
-              </template>
-            </el-table-column>
-            <el-table-column v-for="item in goodsTableHead" :label="item.label" :property="item.property" min-width="150">
-              <template slot-scope="scope">
-                <div class="layui-form-item" v-if="item.label === '经办人'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <select v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                            :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                            :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                    >
-                      <option
-                        v-for="(item, index) in allUserList"
-                        :key="index"
-                        :label="item.username"
-                        :value="item">
-                      </option>
-                    </select>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item" v-else-if="item.label === '服务类型'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <select v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                            :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                            :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                    >
-                      <option
-                        v-for="item in statusList"
-                        :key="item.code"
-                        :label="item.name"
-                        :value="item.code">
-                      </option>
-                    </select>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item" v-else-if="item.label === '安装时间'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <el-date-picker
-                      v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                      :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                      :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                      type="datetime"
-                      :clearable="false"
-                      :editable="false"
-                      placeholder="选择日期时间"
-                      align="right"
-                      :picker-options="pickerOptions1"
-                      size="mini"
-                      value-format="timestamp"
-                      style="width:200px">
-                    </el-date-picker>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item" v-else-if="item.label === '更换时间'">
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <el-date-picker
-                      v-model="scope.row[scope.column.property]" v-validate="'required|quantity'"
-                      :name="scope.column.property + scope.$index" :placeholder="item.placeholder"
-                      :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                      type="datetime"
-                      :clearable="false"
-                      :editable="false"
-                      placeholder="选择日期时间"
-                      align="right"
-                      :picker-options="pickerOptions1"
-                      size="mini"
-                      value-format="timestamp"
-                      style="width:200px">
-                    </el-date-picker>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-                <div class="layui-form-item"  v-else>
-                  <label class="layui-form-label">{{item.label}}</label>
-                  <div class="layui-block">
-                    <input type="text" v-model="scope.row[scope.column.property]" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has(scope.column.property + scope.$index)}"
-                           :name="scope.column.property + scope.$index" class="layui-input" :placeholder="item.placeholder"/>
-                    <el-tooltip class="item" effect="pink" :content="errors.first(scope.column.property + scope.$index)" placement="top">
-                      <i v-show="errors.has(scope.column.property + scope.$index)" class="el-icon-warning errClass" v-cloak></i>
-                    </el-tooltip>
-                  </div>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
-
-      <!--<div class="order-editor-fee">
-        <div class="order-editor-freight">
-          <h3><label class="fn-label">合计运费</label></h3>
-          <div>
-            <label class="layui-form-label freight">运费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.yunfei" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">现返</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.xianfan" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">欠返</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.qianfan" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">送货费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.songhuofei" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">提货费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.tihuofei" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">装卸费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.zhangxiefei" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">声明价值</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.shenmingjiazhi" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">保价费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.baojiafei" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">包装费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.baozhuangfei" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">其它费</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.qitafei" type="text" class="layui-input"/>
-            </div>
-          </div>
-
-        </div>
-        <div class="order-editor-pay">
-          <h3><label class="fn-label">付款方式</label></h3>
-          <div>
-            <label class="layui-form-label freight requireClass">付款方式</label>
-            <div class="layui-block">
-              <select v-model="ruleForm.payment" v-validate="'required'" name="payment" class="layui-input"
-                      :class="{'input': true, 'is-danger': errors.has('payment')}">
-                <option
-                  v-for="item in payMode"
-                  :key="item.code"
-                  :label="item.name"
-                  :value="item.code">
-                </option>
-              </select>
-              <el-tooltip class="item" effect="pink" :content="errors.first('payment')" placement="top">
-                <i v-show="errors.has('payment')" class="el-icon-warning errClassSelect" v-cloak></i>
-              </el-tooltip>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">现付</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.xianfu" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">到付</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.daofu" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">货到打卡</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.huodaodaka" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">月结</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.yuejie" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">回付</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.huifu" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">货款扣</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.huokuankou" type="text" class="layui-input"/>
-            </div>
-          </div>
-          <div>
-            <label class="layui-form-label freight">欠付</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.qianfu" type="text" class="layui-input"/>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="order-editor-extra">
-        <div>
-          <div class="layui-form-item">
-            <label class="layui-form-label requireClass">经办人</label>
-            <div class="layui-block">
-              <select v-model="ruleForm.operator" v-validate="'required'" name="operator" class="layui-input"
-                      :class="{'input': true, 'is-danger': errors.has('operator')}">
-                <option
-                  v-for="item in allUserList"
-                  :key="item.id"
-                  :label="item.username"
-                  :value="item.id">
-                </option>
-              </select>
-              <el-tooltip class="item" effect="pink" :content="errors.first('operator')" placement="top">
-                <i v-show="errors.has('operator')" class="el-icon-warning errClassSelect" v-cloak></i>
-              </el-tooltip>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="layui-form-item">
-            <el-checkbox v-model="ruleForm.konghuo" true-label="1" false-label="0">控货</el-checkbox>
-            <el-checkbox v-model="ruleForm.tihuo" true-label="1" false-label="0">提货</el-checkbox>
-          </div>
-        </div>
-        <div>
-          <div class="layui-form-item">
-            <select v-model="ruleForm.huidan" class="layui-input">
-              <option
-                v-for="item in huidanList"
-                :key="item.code"
-                :label="item.name"
-                :value="item.code">
-              </option>
-            </select>
-            <input v-model="ruleForm.huidanfen" type="text" class="layui-input textCenter">
-            <div>份</div>
-          </div>
-        </div>
-        <div class="order-remark">
-          <div class="layui-form-item">
-            <label class="layui-form-label">备注</label>
-            <div class="layui-block">
-              <input v-model="ruleForm.remark" type="text" class="layui-input">
-            </div>
-          </div>
-        </div>
-      </div>
-      &lt;!&ndash;中转信息&ndash;&gt;
-      <div class="order-editor-info plain create">
-        <div class="order-card full">
-          <h3><i class="fn-icon fn-icon-carry-out"></i>中转信息</h3>
-        </div>
-        <div class="table-wrap">
-          <el-table
-            :data="zzInfoTableData"
-            class="table-wrap-header"
-            border
-            width="100%">
-            <el-table-column label="中转类型" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <select v-model="zzType" class="layui-input">
-                    <option
-                      v-for="item in zzTypeList"
-                      :key="item.code"
-                      :label="item.name"
-                      :value="item.code">
-                    </option>
-                  </select>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转单号" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzdh" type="text" class="layui-input"/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="承运商" prop="" min-width="150" align="center">
-              <template slot-scope="scope">
-                &lt;!&ndash;<div class="layui-form-item">&ndash;&gt;
-                <div class="layui-block">
-                  <input v-model="ruleForm.cys"
-                         autocomplete="off"
-                         type="text"
-                         name="receivingPerson"
-                         class="layui-input"
-                         placeholder="承运商"
-                         @click="cys=!cys"
-                         @input="cysChange">
-                  <selectList
-                    v-show="cys"
-                    :list="cysList"
-                    class="cysShowClass"
-                    @value1="selectCysValueHandle"
-                  ></selectList>
-                </div>
-                &lt;!&ndash;</div>&ndash;&gt;
-              </template>
-            </el-table-column>
-            <el-table-column label="承运商手机号" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.cyssjh" type="text" class="layui-input"/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转到站" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzdz" type="text" class="layui-input"/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转到站业务电话" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzdzywdh" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="交接方式" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <select v-model="ruleForm.jjfs" class="layui-input">
-                    <option
-                      v-for="item in jjfsList"
-                      :key="item.code"
-                      :label="item.name"
-                      :value="item.code">
-                    </option>
-                  </select>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="承运经办人" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="核定中转费" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.hdzzf" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转费" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzf" type="text" class="layui-input"/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="付款方式" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <select v-model="ruleForm.fkfs" class="layui-input">
-                    <option
-                      v-for="item in payMode"
-                      :key="item.code"
-                      :label="item.name"
-                      :value="item.code">
-                    </option>
-                  </select>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转返款" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzfk" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转费合计" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzfhj" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转现付" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzxf" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转到付" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzdf" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转回付" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzhf" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转月结" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzyj" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转欠付" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzqf" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转货款扣" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzhkk" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转货到打卡" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzhddk" type="text" class="layui-input" disabled/>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column label="中转备注" min-width="150" align="center">
-              <template slot-scope="scope">
-                <div class="layui-form-item">
-                  <input v-model="ruleForm.zzbz" type="text" class="layui-input"/>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
-
-      &lt;!&ndash;ceshi&ndash;&gt;
-      <div v-for="(item, indexs) in goodsTableHeads" :key="indexs" class="order-editor-fee">
-        <el-form-item
-          v-for="(domain, index) in item.goodsTableHead"
-          :key="domain.property"
-          :prop="'domains.' + index + '.value'">
-          <div>
-            <label class="layui-form-label freight">{{domain.label}}</label>
-            <div class="layui-block">
-              <input v-model="domain.value" type="text" class="layui-input"/>
-            </div>
-          </div>
-        </el-form-item>
-      </div>-->
 
     </el-form>
 
@@ -685,76 +196,182 @@
         // cys
         cys: false,
         cysList: [],
-        goodsTableHead: [
+        goodsTableHeads: [
           {
-            label: "产品名称",
-            placeholder: '',
-            property: "name"
+            data: [
+              {
+                label: "产品名称",
+                placeholder: '',
+                property: "name",
+                value: 333
+              },
+              {
+                label: "型号",
+                placeholder: '',
+                property: "packing",
+                value: 22211
+              },
+              {
+                label: "数量",
+                placeholder: '',
+                property: "quantity",
+                value: 2222
+              },
+              {
+                label: "安装时间(kg)",
+                placeholder: '',
+                property: "weight",
+                value: 2222
+              },
+              {
+                label: "更换时间(方)",
+                placeholder: '长*宽*高*件数(米)',
+                property: "volume",
+                value: 2222
+              },
+              {
+                label: "服务类型",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "售价",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "进价",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "配件",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "人工",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "获利",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "经办人",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "维护内容与描述",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "备注",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              }
+            ]
           },
           {
-            label: "型号",
-            placeholder: '',
-            property: "version"
-          },
-          {
-            label: "数量",
-            placeholder: '',
-            property: "number"
-          },
-          {
-            label: "安装时间",
-            placeholder: '',
-            property: "installTime"
-          },
-          {
-            label: "更换时间",
-            placeholder: '',
-            property: "replaceTime"
-          },
-          {
-            label: "服务类型",
-            placeholder: '',
-            property: "serviceType"
-          },
-          {
-            label: "售价",
-            placeholder: '',
-            property: "price"
-          },
-          {
-            label: "进价",
-            placeholder: '',
-            property: "costPrice"
-          },
-          {
-            label: "配件",
-            placeholder: '',
-            property: "parts"
-          },
-          {
-            label: "人工",
-            placeholder: '',
-            property: "personCost"
-          },
-          {
-            label: "获利",
-            placeholder: '',
-            property: "profits"
-          },
-          {
-            label: "经办人",
-            placeholder: '',
-            property: "operator"
-          },
-          {
-            label: "维护内容与描述",
-            placeholder: '',
-            property: "description"
-          },
-          {
-            label: "备注",
-            placeholder: '',
-            property: "remark"
+            data: [
+              {
+                label: "产品名称",
+                placeholder: '',
+                property: "name",
+                value: 2222
+              },
+              {
+                label: "型号",
+                placeholder: '',
+                property: "packing",
+                value: 2222
+              },
+              {
+                label: "数量",
+                placeholder: '',
+                property: "quantity",
+                value: 2222
+              },
+              {
+                label: "安装时间(kg)",
+                placeholder: '',
+                property: "weight",
+                value: 2222
+              },
+              {
+                label: "更换时间(方)",
+                placeholder: '长*宽*高*件数(米)',
+                property: "volume",
+                value: 2222
+              },
+              {
+                label: "服务类型",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "售价",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "进价",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "配件",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "人工",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "获利",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "经办人",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "维护内容与描述",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              },
+              {
+                label: "备注",
+                placeholder: '',
+                property: "unitPrice",
+                value: 2222
+              }
+            ]
           }
         ],
         // 数据值
@@ -975,8 +592,6 @@
       }
     },
     mounted () {
-      // this.getCustomerListMethod()
-      this.multipleSelection = [this.tableData[0], this.tableData[1]]
       this.getAllUser()
     },
     computed: {
@@ -1315,11 +930,14 @@
   }
   .order-editor-fee {
     display: flex;
-    align-items: stretch;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    /*align-items: stretch;*/
     border-top: 1px solid #78aadd;
     border-left: 1px solid #78aadd;
     border-bottom: 1px solid #78aadd;
     >div {
+      flex: 25% 1;
       border-right: 1px solid #78aadd;
       >div {
         display: inline-flex;
@@ -1370,7 +988,8 @@
   }
   .order-editor-goods {
     display: flex;
-    align-items: stretch;
+    flex-wrap: wrap;
+    /*align-items: stretch;*/
     background: linear-gradient(270deg,#78aadd 1px,#fff 0);
     .subtract {
       flex: 0 0 31px;
@@ -1595,6 +1214,9 @@
   }
 </style>
 <style>
+  .order-editor-fee .el-form-item {
+    margin-bottom: 0 !important;
+  }
   .el-table.table-wrap-header td, .el-table.table-wrap-header th{
     padding: 4px 0 !important;
   }

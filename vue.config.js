@@ -72,7 +72,7 @@ module.exports = {
         // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
         proxy: {
           '/apis': {    //将www.exaple.com印射为/apis
-            target: 'http://122.112.211.21:8080',  // 接口域名
+            target: 'http://119.3.79.50:8080',  // 接口域名
             changeOrigin: false,  //是否跨域
             pathRewrite: {
               '^/apis': ''   //需要rewrite的,
