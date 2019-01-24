@@ -4,7 +4,7 @@
       <div class="consignment">
         <div class="consignmentOpen">
           <div class="layui-form-item fr waybillNoClass">
-            <label class="order-no-style">订单编号</label>
+            <label class="order-no-style requireClass">订单编号</label>
             <div class="layui-block" style="width: 160px">
               <input v-model="ruleForm.orderNo" v-validate="'required'"
                      autocomplete="off"
@@ -43,41 +43,71 @@
         <div class="order-editor-traffic">
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">所属地区</label>
+              <label class="layui-form-label requireClass">所属地区</label>
               <div class="layui-block">
-                <input v-model="ruleForm.area" class="layui-input" placeholder="所属地区">
+                <input v-model="ruleForm.area" v-validate="'required'"
+                       autocomplete="off"
+                       :class="{'input': true, 'is-danger': errors.has('area')}" type="text" name="area"
+                       class="layui-input" placeholder="所属地区">
+                <el-tooltip class="item" effect="pink" :content="errors.first('area')" placement="top">
+                  <i v-show="errors.has('area')" class="el-icon-warning errClass" v-cloak></i>
+                </el-tooltip>
               </div>
             </div>
           </div>
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">客户类型</label>
+              <label class="layui-form-label requireClass">客户类型</label>
               <div class="layui-block">
-                <input v-model="ruleForm.customerType" class="layui-input" placeholder="客户类型">
+                <input v-model="ruleForm.customerType" v-validate="'required'"
+                       autocomplete="off"
+                       :class="{'input': true, 'is-danger': errors.has('customerType')}" type="text" name="customerType"
+                       class="layui-input" placeholder="客户类型">
+                <el-tooltip class="item" effect="pink" :content="errors.first('customerType')" placement="top">
+                  <i v-show="errors.has('customerType')" class="el-icon-warning errClass" v-cloak></i>
+                </el-tooltip>
               </div>
             </div>
           </div>
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">客户名称</label>
+              <label class="layui-form-label requireClass">客户名称</label>
               <div class="layui-block">
-                <input v-model="ruleForm.customerName" class="layui-input" placeholder="客户名称">
+                <input v-model="ruleForm.customerName" v-validate="'required'"
+                       autocomplete="off"
+                       :class="{'input': true, 'is-danger': errors.has('customerName')}" type="text" name="customerName"
+                       class="layui-input" placeholder="客户名称">
+                <el-tooltip class="item" effect="pink" :content="errors.first('customerName')" placement="top">
+                  <i v-show="errors.has('customerName')" class="el-icon-warning errClass" v-cloak></i>
+                </el-tooltip>
               </div>
             </div>
           </div>
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">联系人</label>
+              <label class="layui-form-label requireClass">联系人</label>
               <div class="layui-block">
-                <input v-model="ruleForm.person" class="layui-input" placeholder="联系人">
+                <input v-model="ruleForm.person" v-validate="'required'"
+                       autocomplete="off"
+                       :class="{'input': true, 'is-danger': errors.has('person')}" type="text" name="person"
+                       class="layui-input" placeholder="联系人">
+                <el-tooltip class="item" effect="pink" :content="errors.first('person')" placement="top">
+                  <i v-show="errors.has('person')" class="el-icon-warning errClass" v-cloak></i>
+                </el-tooltip>
               </div>
             </div>
           </div>
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">联系电话</label>
+              <label class="layui-form-label requireClass">联系电话</label>
               <div class="layui-block">
-                <input v-model="ruleForm.personPhone" class="layui-input" placeholder="联系电话">
+                <input v-model="ruleForm.personPhone" v-validate="'required|phone'"
+                       autocomplete="off"
+                       :class="{'input': true, 'is-danger': errors.has('personPhone')}" type="text" name="personPhone"
+                       class="layui-input" placeholder="联系电话">
+                <el-tooltip class="item" effect="pink" :content="errors.first('personPhone')" placement="top">
+                  <i v-show="errors.has('personPhone')" class="el-icon-warning errClass" v-cloak></i>
+                </el-tooltip>
               </div>
             </div>
           </div>
@@ -87,9 +117,15 @@
         <div class="order-editor-traffic">
           <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">安装地址</label>
+              <label class="layui-form-label requireClass">安装地址</label>
               <div class="layui-block">
-                <input v-model="ruleForm.address" class="layui-input" placeholder="安装地址">
+                <input v-model="ruleForm.address" v-validate="'required'"
+                       autocomplete="off"
+                       :class="{'input': true, 'is-danger': errors.has('address')}" type="text" name="address"
+                       class="layui-input" placeholder="安装地址">
+                <el-tooltip class="item" effect="pink" :content="errors.first('address')" placement="top">
+                  <i v-show="errors.has('address')" class="el-icon-warning errClass" v-cloak></i>
+                </el-tooltip>
               </div>
             </div>
           </div>
@@ -363,6 +399,7 @@
       }
     },
     mounted () {
+      this.multipleSelection = [this.tableData[0], this.tableData[1]]
       this.getAllUser()
     },
     computed: {

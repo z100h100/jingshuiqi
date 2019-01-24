@@ -36,7 +36,7 @@
               highlight-current-row>
       <el-table-column label="运单号" width="200" align="center">
         <template slot-scope="scope">
-          <div class="waybillNoClass" @click="showDetail(scope.row.id)">{{scope.row.orderNo}}</div>
+          <div>{{scope.row.orderNo}}</div>
         </template>
       </el-table-column>
       <el-table-column label="开单时间" min-width="150" align="center">
@@ -44,11 +44,11 @@
           {{scope.row.orderDate ? $moment(scope.row.orderDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
         </template>
       </el-table-column>
-      <!--<el-table-column label="发货人" width="150" align="center">-->
-        <!--<template slot-scope="scope">-->
-          <!--{{scope.row.deliveryPerson}}-->
-        <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table-column label="客户名称" width="150" align="center">
+        <template slot-scope="scope">
+          {{scope.row.customerName}}
+        </template>
+      </el-table-column>
       <!--<el-table-column label="收货人" width="150" align="center">-->
         <!--<template slot-scope="scope">-->
           <!--{{scope.row.receivingPerson}}-->
@@ -76,7 +76,7 @@
       <!--</el-table-column>-->
       <el-table-column label="操作" width="110" align="center">
         <template slot-scope="scope">
-          <el-button type="text" @click="showDetail(scope.row.id)">查看详情</el-button>
+          <el-button type="text" @click="showDetail(scope.row.id)">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
