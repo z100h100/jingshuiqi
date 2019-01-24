@@ -84,10 +84,10 @@ export default {
     return api.fetch('post', `${base}/user/update`, params)
   },
   GET_WAYBILLPAGE (params) {
-    return api.fetch('post', `${base}/waybill/page`, params)
+    return api.fetch('post', `${base}/customerorder/page`, params)
   },
   GET_WAYBILLGET (params) {
-    return api.fetch('get', `${base}/waybill/get`, params)
+    return api.fetch('get', `${base}/customerorder/get`, params)
   },
   GET_WAYBILLSAVE (params) {
     return api.fetch('post', `${base}/waybill/save`, params)
@@ -104,7 +104,7 @@ export default {
   GET_WAYBILLPHONE (params) {
     return api.fetch('get', `${base}/waybill/visitingcard/name`, params)
   },
-
+  // 净水接口
   GET_CUSTOMERSAVE (params) {
     return api.fetch('post', `${base}/customerorder/save`, params)
   },

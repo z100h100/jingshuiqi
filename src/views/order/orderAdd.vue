@@ -1,144 +1,166 @@
 <template>
   <div class="app-container" style="min-width: 1024px;">
     <el-form ref="ruleForm" :model="ruleForm">
-      <!--<div class="consignment">-->
-        <!--<div class="consignmentOpen">-->
-          <!--<div class="layui-form-item fr waybillNoClass">-->
-            <!--<label class="order-no-style">订单编号</label>-->
-            <!--<div class="layui-block" style="width: 160px">-->
-              <!--<input v-model="ruleForm.orderNo" v-validate="'required|orderNo'"-->
-                     <!--autocomplete="off"-->
-                     <!--:class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"-->
-                     <!--class="layui-input" placeholder="订单编号">-->
-              <!--<el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">-->
-                <!--<i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>-->
-              <!--</el-tooltip>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="consignmentTitle">客户管理表</div>-->
-        <!--<div class="consignmentInfo">-->
-          <!--<el-form-item label="" prop="waybillDate" class="orderContentRight fr">-->
-            <!--<el-date-picker-->
-              <!--v-model="ruleForm.waybillDate"-->
-              <!--type="datetime"-->
-              <!--:clearable="false"-->
-              <!--:editable="false"-->
-              <!--placeholder="选择日期时间"-->
-              <!--align="right"-->
-              <!--class="orderInput"-->
-              <!--:picker-options="pickerOptions1"-->
-              <!--size="mini"-->
-              <!--value-format="timestamp"-->
-              <!--style="width:200px">-->
-            <!--</el-date-picker>-->
-          <!--</el-form-item>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash;表单内容&ndash;&gt;-->
-      <!--<div class="title-style">-->
-        <!--<span>客户信息</span>-->
-      <!--</div>-->
-      <!--<div class="order-content skin-border">-->
-        <!--<div class="order-editor-traffic">-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">所属地区</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.area" class="layui-input" placeholder="所属地区">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">客户类型</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.customerType" class="layui-input" placeholder="客户类型">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">客户名称</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.customerName" class="layui-input" placeholder="客户名称">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">联系人</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.person" class="layui-input" placeholder="联系人">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">联系电话</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.personPhone" class="layui-input" placeholder="联系电话">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--&lt;!&ndash;<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label requireClass">送货方式</label>-->
-              <!--<div class="layui-block">-->
-                <!--<select v-model="ruleForm.deliveryMode" v-validate="'required'" name="deliveryMode" class="layui-input"-->
-                        <!--:class="{'input': true, 'is-danger': errors.has('deliveryMode')}">-->
-                  <!--<option-->
-                    <!--v-for="item in deliveryModeList"-->
-                    <!--:key="item.code"-->
-                    <!--:label="item.name"-->
-                    <!--:value="item.code">-->
-                  <!--</option>-->
-                <!--</select>-->
-                <!--<el-tooltip class="item" effect="pink" :content="errors.first('deliveryMode')" placement="top">-->
-                  <!--<i v-show="errors.has('deliveryMode')" class="el-icon-warning errClassSelect" v-cloak></i>-->
-                <!--</el-tooltip>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>&ndash;&gt;-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="order-content skin-border">-->
-        <!--<div class="order-editor-traffic">-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">安装地址</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.address" class="layui-input" placeholder="安装地址">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<div class="layui-form-item">-->
-              <!--<label class="layui-form-label">备注</label>-->
-              <!--<div class="layui-block">-->
-                <!--<input v-model="ruleForm.remark" class="layui-input" placeholder="备注">-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div class="title-style">-->
-        <!--<span>产品内容</span>-->
-      <!--</div>-->
-      <div class="order-editor-goods">
-        <!--ceshi-->
-        <div v-for="(item, index) in goodsTableHeads" :key="index" class="order-editor-fee">
-          <el-form-item
-            v-for="(domain) in item.data"
-            :key="domain.property">
+      <div class="consignment">
+        <div class="consignmentOpen">
+          <div class="layui-form-item fr waybillNoClass">
+            <label class="order-no-style">订单编号</label>
+            <div class="layui-block" style="width: 160px">
+              <input v-model="ruleForm.orderNo" v-validate="'required'"
+                     autocomplete="off"
+                     :class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"
+                     class="layui-input" placeholder="订单编号">
+              <el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">
+                <i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>
+              </el-tooltip>
+            </div>
+          </div>
+        </div>
+        <div class="consignmentTitle">客户管理表</div>
+        <div class="consignmentInfo">
+          <el-form-item prop="orderDate" class="orderContentRight fr">
+            <el-date-picker
+              v-model="ruleForm.orderDate"
+              type="datetime"
+              :clearable="false"
+              :editable="false"
+              placeholder="选择日期时间"
+              align="right"
+              class="orderInput"
+              :picker-options="pickerOptions1"
+              size="mini"
+              value-format="timestamp"
+              style="width:200px">
+            </el-date-picker>
+          </el-form-item>
+        </div>
+      </div>
+      <!--表单内容-->
+      <div class="title-style">
+        <span>客户信息</span>
+      </div>
+      <div class="order-content skin-border">
+        <div class="order-editor-traffic">
+          <div>
             <div class="layui-form-item">
-              <label class="layui-form-label">{{domain.label}}</label>
+              <label class="layui-form-label">所属地区</label>
               <div class="layui-block">
-                <input v-model="domain.value" type="text" class="layui-input"/>
+                <input v-model="ruleForm.area" class="layui-input" placeholder="所属地区">
               </div>
             </div>
-          </el-form-item>
+          </div>
+          <div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">客户类型</label>
+              <div class="layui-block">
+                <input v-model="ruleForm.customerType" class="layui-input" placeholder="客户类型">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">客户名称</label>
+              <div class="layui-block">
+                <input v-model="ruleForm.customerName" class="layui-input" placeholder="客户名称">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">联系人</label>
+              <div class="layui-block">
+                <input v-model="ruleForm.person" class="layui-input" placeholder="联系人">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">联系电话</label>
+              <div class="layui-block">
+                <input v-model="ruleForm.personPhone" class="layui-input" placeholder="联系电话">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="order-content skin-border">
+        <div class="order-editor-traffic">
+          <div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">安装地址</label>
+              <div class="layui-block">
+                <input v-model="ruleForm.address" class="layui-input" placeholder="安装地址">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">备注</label>
+              <div class="layui-block">
+                <input v-model="ruleForm.remark" class="layui-input" placeholder="备注">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-style">
+        <span>产品内容</span>
+      </div>
+      <div class="order-editor-goods">
+        <!--ceshi-->
+        <div v-for="(item, index) in goodsTableHeads" :key="index">
+          <div>
+            <el-button type="primary" icon="el-icon-plus" circle v-if="index== 0" @click="addGoodsList"></el-button>
+            <el-button icon="el-icon-minus" circle v-else @click="delGoodsList(index)"></el-button>
+          </div>
+          <div class="order-editor-fee">
+            <el-form-item
+              v-for="(domain) in item.data"
+              :key="domain.property">
+              <div class="layui-form-item" v-if="domain.label === '经办人'">
+                <label class="layui-form-label requireClass">{{domain.label}}</label>
+                <div class="layui-block">
+                  <select v-model="domain.value" v-validate="'required'" :name="'operator' + index" class="layui-input"
+                          :class="{'input': true, 'is-danger': errors.has('operator' + index)}">
+                    <option
+                      v-for="item in allUserList"
+                      :key="item.id"
+                      :label="item.username"
+                      :value="item.id">
+                    </option>
+                  </select>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('operator' + index)" placement="top">
+                    <i v-show="errors.has('operator' + index)" class="el-icon-warning errClassSelect" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '安装时间' || domain.label === '更换时间'">
+                <label class="layui-form-label requireClass">{{domain.label}}</label>
+                <div class="layui-block">
+                  <el-date-picker
+                    v-model="domain.value"
+                    type="datetime"
+                    :clearable="false"
+                    :editable="false"
+                    placeholder="选择日期时间"
+                    align="right"
+                    class="orderInput"
+                    :picker-options="pickerOptions1"
+                    size="mini"
+                    value-format="timestamp"
+                    style="width:100%">
+                  </el-date-picker>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else>
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" class="layui-input"/>
+                </div>
+              </div>
+            </el-form-item>
+          </div>
         </div>
       </div>
 
@@ -170,22 +192,12 @@
 </template>
 
 <script>
-  import { Base64 } from 'js-base64'
-  import { mapState, mapActions } from 'vuex'
+  import {mapActions, mapState} from 'vuex'
   import '../trackDetails/vali'
   import selectList from '@/components/selectList'
 
   export default {
     data () {
-      var checkPhone = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('手机号不能为空'))
-        }
-        if (!(/^1[34578]\d{9}$/.test(value))) {
-          return callback(new Error('请填写正确的手机号'))
-        }
-        callback()
-      }
       return {
         // 发货人
         deliveryPersonList: [],
@@ -203,173 +215,85 @@
                 label: "产品名称",
                 placeholder: '',
                 property: "name",
-                value: 333
+                value: ''
               },
               {
                 label: "型号",
                 placeholder: '',
-                property: "packing",
-                value: 22211
+                property: "model",
+                value: ''
               },
               {
                 label: "数量",
                 placeholder: '',
-                property: "quantity",
-                value: 2222
+                property: "number",
+                value: ''
               },
               {
-                label: "安装时间(kg)",
+                label: "安装时间",
                 placeholder: '',
-                property: "weight",
-                value: 2222
+                property: "installTime",
+                value: ''
               },
               {
-                label: "更换时间(方)",
+                label: "更换时间",
                 placeholder: '长*宽*高*件数(米)',
-                property: "volume",
-                value: 2222
+                property: "replaceTime",
+                value: ''
               },
               {
                 label: "服务类型",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "serviceType",
+                value: ''
               },
               {
                 label: "售价",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "price",
+                value: ''
               },
               {
                 label: "进价",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "costPrice",
+                value: ''
               },
               {
                 label: "配件",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "parts",
+                value: ''
               },
               {
                 label: "人工",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "personCost",
+                value: ''
               },
               {
                 label: "获利",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "profits",
+                value: ''
               },
               {
                 label: "经办人",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "operator",
+                value: ''
               },
               {
                 label: "维护内容与描述",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "description",
+                value: ''
               },
               {
                 label: "备注",
                 placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              }
-            ]
-          },
-          {
-            data: [
-              {
-                label: "产品名称",
-                placeholder: '',
-                property: "name",
-                value: 2222
-              },
-              {
-                label: "型号",
-                placeholder: '',
-                property: "packing",
-                value: 2222
-              },
-              {
-                label: "数量",
-                placeholder: '',
-                property: "quantity",
-                value: 2222
-              },
-              {
-                label: "安装时间(kg)",
-                placeholder: '',
-                property: "weight",
-                value: 2222
-              },
-              {
-                label: "更换时间(方)",
-                placeholder: '长*宽*高*件数(米)',
-                property: "volume",
-                value: 2222
-              },
-              {
-                label: "服务类型",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "售价",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "进价",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "配件",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "人工",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "获利",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "经办人",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "维护内容与描述",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
-              },
-              {
-                label: "备注",
-                placeholder: '',
-                property: "unitPrice",
-                value: 2222
+                property: "remark",
+                value: ''
               }
             ]
           }
@@ -455,44 +379,10 @@
           personPhone: '',
           remark: '',
           address: '',
-
-          waybillDate: new Date(),
-          deliveryPerson: '',
-          receivingPerson: '',
-          deliverySms: 1,
-          receiveSms: 1,
-          huidan: '0',
-          huidanfen: 0
+          orderDate: new Date(),
+          customerSms: 1,
+          platformSms: 1,
         },
-        // rules_system: {
-        //   waybillNo: [
-        //     {required: true, message: '请输入运单号', trigger: 'blur'}
-        //   ],
-        //   operator: [
-        //     {required: true, message: '请输入经办人', trigger: 'blur'}
-        //   ],
-        //   receivingPhone: [
-        //     {required: true, validator: checkPhone, trigger: 'blur'}
-        //   ],
-        //   deliveryPhone: [
-        //     {required: true, validator: checkPhone, trigger: 'blur'}
-        //   ],
-        //   deliveryMode: [
-        //     {required: true, message: '请选择送货方式', trigger: 'change'}
-        //   ],
-        //   payment: [
-        //     {required: true, message: '请选择付款方式', trigger: 'change'}
-        //   ],
-        //   deliveryPerson: [
-        //     {required: true, message: '请输入发货人', trigger: 'blur'}
-        //   ],
-        //   receivingPerson: [
-        //     {required: true, message: '请输入收货人', trigger: 'blur'}
-        //   ],
-        //   quantity: [
-        //     {required: true, message: '请输入件数', trigger: 'blur'}
-        //   ],
-        // },
         payMode: [
           {
             name: '现付',
@@ -573,18 +463,18 @@
         multipleSelection: [],
         tableData: [
           {
-            id: 'deliverySms',
+            id: 'customerSms',
             status: 1,
-            messageType: '跟踪-发货人',
-            toPerson: '发货人',
-            MSMtemplate: '您好，您发给{收货人}的{货物名称}已受理，运单号{运单号}。查单链接：{短信跟踪链接} {当前组织名称}，电话:{当前组织联系电话}'
+            messageType: '是否给客户发短信',
+            toPerson: '客户',
+            MSMtemplate: '您好，您平台中{客户}所购买的{产品名称}耗材已到更换时间，请您及时联系客户方更换'
           },
           {
-            id: 'receiveSms',
+            id: 'platformSms',
             status: 1,
-            messageType: '跟踪-收货人',
-            toPerson: '收货人',
-            MSMtemplate: '您好，{发货人}发给您的{货物名称}已受理，运单号{运单号}。查单链接：{短信跟踪链接} {当前组织名称}，电话:{当前组织联系电话}'
+            messageType: '是否给平台管理员发短信',
+            toPerson: '管理员',
+            MSMtemplate: '您好，苏康水给您安装的{产品名称}，所属耗材已到更换时间，请尽快联系售后处理：13915400696'
           }
         ],
         smsList: [],
@@ -603,23 +493,10 @@
     components: {
       selectList: selectList
     },
-    filters: {
-      filterStatus (value, list) {
-        if (value == '99') {
-          return '创建订单'
-        }
-        let valueName = ''
-        list.map(item => {
-          if (item.code == value) valueName = item.name
-        })
-        return valueName
-      }
-    },
     methods: {
       ...mapActions([
         'getCustomerSave',
         'getCustomerList',
-
         'getWaybillSaveSMS',
         'getSMS',
         'getWaybillPhone',
@@ -687,28 +564,97 @@
         })
       },
       addGoodsList () {
-        this.goodsTableData.push({
-          costPrice: 0,
-          description: '',
-          id: 0,
-          installTime: '',
-          model: '',
-          name: '',
-          number: 0,
-          operator: {
-          },
-          parts: 0,
-          personCost: 0,
-          price: 0,
-          profits: 0,
-          remark:'',
-          replaceTime: '',
-          serviceType: 0,
-          version: 0
+        this.goodsTableHeads.push({
+          data: [
+            {
+              label: "产品名称",
+              placeholder: '',
+              property: "name",
+              value: ''
+            },
+            {
+              label: "型号",
+              placeholder: '',
+              property: "model",
+              value: ''
+            },
+            {
+              label: "数量",
+              placeholder: '',
+              property: "number",
+              value: ''
+            },
+            {
+              label: "安装时间",
+              placeholder: '',
+              property: "installTime",
+              value: ''
+            },
+            {
+              label: "更换时间",
+              placeholder: '长*宽*高*件数(米)',
+              property: "replaceTime",
+              value: ''
+            },
+            {
+              label: "服务类型",
+              placeholder: '',
+              property: "serviceType",
+              value: ''
+            },
+            {
+              label: "售价",
+              placeholder: '',
+              property: "price",
+              value: ''
+            },
+            {
+              label: "进价",
+              placeholder: '',
+              property: "costPrice",
+              value: ''
+            },
+            {
+              label: "配件",
+              placeholder: '',
+              property: "parts",
+              value: ''
+            },
+            {
+              label: "人工",
+              placeholder: '',
+              property: "personCost",
+              value: ''
+            },
+            {
+              label: "获利",
+              placeholder: '',
+              property: "profits",
+              value: ''
+            },
+            {
+              label: "经办人",
+              placeholder: '',
+              property: "operator",
+              value: ''
+            },
+            {
+              label: "维护内容与描述",
+              placeholder: '',
+              property: "description",
+              value: ''
+            },
+            {
+              label: "备注",
+              placeholder: '',
+              property: "remark",
+              value: ''
+            }
+          ]
         })
       },
       delGoodsList (index) {
-        this.goodsTableData.splice(index, 1)
+        this.goodsTableHeads.splice(index, 1)
       },
       // 获取全部user
       getAllUser () {
@@ -728,10 +674,9 @@
             this.ruleForm[item.id] = item.status
           })
         } else {
-          this.ruleForm['deliverySms'] = 0
-          this.ruleForm['receiveSms'] = 0
+          this.ruleForm['customerSms'] = 0
+          this.ruleForm['platformSms'] = 0
         }
-        // console.log(this.ruleForm, 2222)
         this.dialogVisible = false
       },
       selectStatus (selection) {
@@ -759,15 +704,6 @@
         this.smsList = this.tableData
         // console.log(this.tableData)
       },
-      uniq (array) {
-        var temp = [] //一个新的临时数组
-        for (var i = 0; i < array.length; i++) {
-          if (temp.indexOf(array[i]) == -1) {
-            temp.push(array[i])
-          }
-        }
-        return temp
-      },
       MSMNotic () {
         this.dialogVisible = true
         this.$nextTick(() => {
@@ -779,69 +715,44 @@
       // 提交
       submitForm () {
         this.btnSaveLoading = true
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            let params = Object.assign({}, this.ruleForm)
+            params.orderDate = new Date(this.ruleForm.orderDate).getTime()
 
-        let params = Object.assign({}, this.ruleForm)
-        params.waybillDate = new Date(this.ruleForm.waybillDate).getTime()
-        params.operator = {
-          id: params.operator
-        }
-        params.products = this.goodsTableData
-        this.getCustormerSave(params).then(res => {
-          // let _params = {
-          //   deliverySms: params.deliverySms,
-          //   receiveSms: params.receiveSms,
-          //   id: res.data.data
-          // }
-          // this.getWaybillSaveSMS(_params).then(() => {
-          //   this.$message({
-          //     type: 'success',
-          //     message: '保存成功'
-          //   })
-          //   this.$router.push({name: 'orderList'})
-          // })
-          this.$message({
-            type: 'success',
-            message: '保存成功'
-          })
-          this.$router.push({name: 'orderList'})
-        }).catch(() => {
-          this.btnSaveLoading = false
+            // 动态添加数据转换
+            params.products = this.goodsTableHeads.map(res => {
+              let aa = {}
+              res.data.map(items => {
+                if (items.property === 'operator') {
+                  aa[`${items.property}`] = {
+                    id: items.value
+                  }
+                  return aa
+                } else {
+                  aa[`${items.property}`] = `${items.value}`
+                  return aa
+                }
+              })
+              return aa
+            })
+            // 删除operator
+            delete params.operator
+            // console.log(params)
+            this.getCustomerSave(params).then(res => {
+              this.$message({
+                type: 'success',
+                message: '保存成功'
+              })
+              this.$router.push({name: 'orderList'})
+            }).catch(() => {
+              this.btnSaveLoading = false
+            })
+          } else {
+            this.btnSaveLoading = false
+            return false
+          }
         })
-
-        // this.$validator.validateAll().then((result) => {
-        //   if (result) {
-        //     let params = Object.assign({}, this.ruleForm)
-        //     params.waybillDate = new Date(this.ruleForm.waybillDate).getTime()
-        //     params.operator = {
-        //       id: params.operator
-        //     }
-        //     params.products = this.goodsTableData
-        //     this.getCustormerSave(params).then(res => {
-        //       // let _params = {
-        //       //   deliverySms: params.deliverySms,
-        //       //   receiveSms: params.receiveSms,
-        //       //   id: res.data.data
-        //       // }
-        //       // this.getWaybillSaveSMS(_params).then(() => {
-        //       //   this.$message({
-        //       //     type: 'success',
-        //       //     message: '保存成功'
-        //       //   })
-        //       //   this.$router.push({name: 'orderList'})
-        //       // })
-        //       this.$message({
-        //         type: 'success',
-        //         message: '保存成功'
-        //       })
-        //       this.$router.push({name: 'orderList'})
-        //     }).catch(() => {
-        //       this.btnSaveLoading = false
-        //     })
-        //   } else {
-        //     this.btnSaveLoading = false
-        //     return false
-        //   }
-        // })
       },
       handleShowByCancel () {
         this.$router.push({name: 'orderList'})
@@ -990,7 +901,7 @@
     display: flex;
     flex-wrap: wrap;
     /*align-items: stretch;*/
-    background: linear-gradient(270deg,#78aadd 1px,#fff 0);
+    /*background: linear-gradient(270deg,#78aadd 1px,#fff 0);*/
     .subtract {
       flex: 0 0 31px;
       border-right: 1px solid #78aadd;

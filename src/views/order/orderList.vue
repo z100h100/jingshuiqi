@@ -16,17 +16,17 @@
             style="width: 380px">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="经办人">
-          <el-select v-model="formInline.operator" style="width:180px" placeholder="请选择">
-            <el-option label="全部" value=""></el-option>
-            <el-option
-              v-for="item in allUserList"
-              :key="item.id"
-              :label="item.username"
-              :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
+        <!--<el-form-item label="经办人">-->
+          <!--<el-select v-model="formInline.operator" style="width:180px" placeholder="请选择">-->
+            <!--<el-option label="全部" value=""></el-option>-->
+            <!--<el-option-->
+              <!--v-for="item in allUserList"-->
+              <!--:key="item.id"-->
+              <!--:label="item.username"-->
+              <!--:value="item.id">-->
+            <!--</el-option>-->
+          <!--</el-select>-->
+        <!--</el-form-item>-->
         <el-form-item>
           <el-button type="primary" @click="fetchData()">查询</el-button>
         </el-form-item>
@@ -36,44 +36,44 @@
               highlight-current-row>
       <el-table-column label="运单号" width="200" align="center">
         <template slot-scope="scope">
-          <div class="waybillNoClass" @click="waybillNoClick(scope.row)">{{scope.row.waybillNo}}</div>
+          <div class="waybillNoClass" @click="showDetail(scope.row.id)">{{scope.row.orderNo}}</div>
         </template>
       </el-table-column>
       <el-table-column label="开单时间" min-width="150" align="center">
         <template slot-scope="scope">
-          {{scope.row.waybillDate ? $moment(scope.row.waybillDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
+          {{scope.row.orderDate ? $moment(scope.row.orderDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
         </template>
       </el-table-column>
-      <el-table-column label="发货人" width="150" align="center">
-        <template slot-scope="scope">
-          {{scope.row.deliveryPerson}}
-        </template>
-      </el-table-column>
-      <el-table-column label="收货人" width="150" align="center">
-        <template slot-scope="scope">
-          {{scope.row.receivingPerson}}
-        </template>
-      </el-table-column>
-      <el-table-column label="运单状态" width="110" align="center">
-        <template slot-scope="scope">
-          {{scope.row.status | filterStatus(statusList)}}
-        </template>
-      </el-table-column>
-      <el-table-column label="发站" width="110" align="center">
-        <template slot-scope="scope">
-          {{scope.row.departureStation}}
-        </template>
-      </el-table-column>
-      <el-table-column label="到站" width="110" align="center">
-        <template slot-scope="scope">
-          {{scope.row.arriveStation}}
-        </template>
-      </el-table-column>
-      <el-table-column label="送货方式" width="110" align="center">
-        <template slot-scope="scope">
-          {{scope.row.deliveryMode | filterMode(deliveryMode)}}
-        </template>
-      </el-table-column>
+      <!--<el-table-column label="发货人" width="150" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.deliveryPerson}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
+      <!--<el-table-column label="收货人" width="150" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.receivingPerson}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
+      <!--<el-table-column label="运单状态" width="110" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.status | filterStatus(statusList)}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
+      <!--<el-table-column label="发站" width="110" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.departureStation}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
+      <!--<el-table-column label="到站" width="110" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.arriveStation}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
+      <!--<el-table-column label="送货方式" width="110" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.deliveryMode | filterMode(deliveryMode)}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
       <el-table-column label="操作" width="110" align="center">
         <template slot-scope="scope">
           <el-button type="text" @click="showDetail(scope.row.id)">查看详情</el-button>
@@ -130,153 +130,8 @@
         listLoading: true,
         formInline: {
           waybillDate: this.getSeventDays(),
-          waybillNo: '',
-          operator: ''
-        },
-        statusList: [
-          {
-            name: '已入库',
-            code: '0'
-          },
-          {
-            name: '短驳中',
-            code: '1'
-          },
-          {
-            name: '已装车',
-            code: '2'
-          },
-          {
-            name: '已发车',
-            code: '3'
-          },
-          {
-            name: '已到达',
-            code: '4'
-          },
-          {
-            name: '已卸车',
-            code: '5'
-          },
-          {
-            name: '中转中',
-            code: '6'
-          },
-          {
-            name: '已接收',
-            code: '7'
-          },
-          {
-            name: '送货中',
-            code: '8'
-          },
-          {
-            name: '已送货',
-            code: '9'
-          },
-          {
-            name: '已签收',
-            code: '10'
-          },
-          {
-            name: '待补录',
-            code: '11'
-          },
-          {
-            name: '提货中',
-            code: '12'
-          },
-          {
-            name: '已提货',
-            code: '13'
-          },
-          {
-            name: '网点中转中',
-            code: '14'
-          },
-          {
-            name: '网点中转已接收',
-            code: '15'
-          },
-          {
-            name: '预装车',
-            code: '16'
-          },
-          {
-            name: '部分短驳中',
-            code: '17'
-          },
-          {
-            name: '部分短驳完成',
-            code: '18'
-          },
-          {
-            name: '部分装车',
-            code: '19'
-          },
-          {
-            name: '部分发车',
-            code: '20'
-          },
-          {
-            name: '部分到达',
-            code: '21'
-          },
-          {
-            name: '部分送货中',
-            code: '22'
-          },
-          {
-            name: '部分送货完成',
-            code: '23'
-          },
-          {
-            name: '部分签收',
-            code: '24'
-          },
-          {
-            name: '部分入库',
-            code: '25'
-          }
-        ],
-        deliveryMode: [
-          {
-            name: '自提',
-            code: '0'
-          },
-          {
-            name: '送货',
-            code: '1'
-          },
-          {
-            name: '送货上门',
-            code: '2'
-          },
-          {
-            name: '送货上楼(有电梯)',
-            code: '3'
-          },
-          {
-            name: '送货上楼(无电梯)',
-            code: '4'
-          },
-          {
-            name: '送货卸货',
-            code: '5'
-          },
-          {
-            name: '送货安装',
-            code: '6'
-          },
-          {
-            name: '整车直送',
-            code: '7'
-          },
-          {
-            name: '大车直送',
-            code: '8'
-          }
-        ]
+          waybillNo: ''
+        }
       }
     },
     filters: {
@@ -359,21 +214,15 @@
             params: [
               {
                 andOr: "and",
-                name: "waybillNo",
+                name: "orderNo",
                 operation: "like",
                 value: this.formInline.waybillNo
               },
               {
                 andOr: "and",
-                name: "waybillDate",
+                name: "orderDate",
                 operation: "between",
                 value: ['#toDate' + new Date(this.formInline.waybillDate[0]).getTime(), '#toDate' + new Date(this.formInline.waybillDate[1]).getTime()]
-              },
-              {
-                andOr: "and",
-                name: "operator.id",
-                operation: "eq",
-                value: this.formInline.operator
               }
             ]
           }
@@ -384,15 +233,9 @@
             params: [
               {
                 andOr: "and",
-                name: "waybillNo",
+                name: "orderNo",
                 operation: "like",
                 value: this.formInline.waybillNo
-              },
-              {
-                andOr: "and",
-                name: "operator.id",
-                operation: "eq",
-                value: this.formInline.operator
               }
             ]
           }

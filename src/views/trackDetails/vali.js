@@ -26,7 +26,7 @@ const dict = {
   zh_CN: {
     messages: {
       required: (name) => {
-        if (name === 'waybillNo') return `运单号不能为空!`
+        if (name === 'orderNo') return `运单号不能为空!`
         if (name === 'deliveryMode') return `请选择送货方式!`
         if (name === 'deliveryPerson') return `发货人不能为空!`
         if (name === 'deliveryPhone' || name === 'receivingPhone') return `手机号码不能为空!`
