@@ -53,8 +53,8 @@
       </el-table-column>
       <el-table-column label="操作" width="110" align="center">
         <template slot-scope="scope">
-          <el-button type="text" @click="showDetail(scope.row.id)">查看</el-button>
-          <el-button type="text" @click="showDetail(scope.row.id)">修改</el-button>
+          <el-button type="text" @click="showDetail(scope.row.id, 'show')">查看</el-button>
+          <el-button type="text" @click="showDetail(scope.row.id, 'edit')">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -132,8 +132,8 @@
         'getWaybillPage',
         'getUserAllUser'
       ]),
-      showDetail (id) {
-        this.$router.push({name: 'orderDetail', params: {id: id}})
+      showDetail (id, flag) {
+        this.$router.push({name: 'orderDetail', params: {id: id, flag: flag}})
       },
       waybillNoClick (row) {
         this.$router.push({name: 'orderTrack', params: {id: row.id}})

@@ -58,7 +58,7 @@ export const constantRouterMap = [
         meta: { title: '订单列表', icon: 'edit' }
       },
       {
-        path: 'orderDetail/:id',
+        path: 'orderDetail/:id/:flag',
         name: 'orderDetail',
         label: '订单详情',
         parent: 'Order',

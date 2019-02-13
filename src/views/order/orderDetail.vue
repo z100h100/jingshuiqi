@@ -9,7 +9,8 @@
               <input v-model="ruleForm.orderNo" v-validate="'required'"
                      autocomplete="off"
                      :class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"
-                     class="layui-input" placeholder="订单编号">
+                     class="layui-input" placeholder="订单编号"
+                     :disabled="disabled">
               <el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">
                 <i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>
               </el-tooltip>
@@ -30,6 +31,7 @@
               :picker-options="pickerOptions1"
               size="mini"
               value-format="timestamp"
+              :disabled="disabled"
               style="width:200px">
             </el-date-picker>
           </el-form-item>
@@ -48,7 +50,8 @@
                 <input v-model="ruleForm.area" v-validate="'required'"
                        autocomplete="off"
                        :class="{'input': true, 'is-danger': errors.has('area')}" type="text" name="area"
-                       class="layui-input" placeholder="所属地区">
+                       class="layui-input" placeholder="所属地区"
+                       :disabled="disabled">
                 <el-tooltip class="item" effect="pink" :content="errors.first('area')" placement="top">
                   <i v-show="errors.has('area')" class="el-icon-warning errClass" v-cloak></i>
                 </el-tooltip>
@@ -62,7 +65,8 @@
                 <input v-model="ruleForm.customerType" v-validate="'required'"
                        autocomplete="off"
                        :class="{'input': true, 'is-danger': errors.has('customerType')}" type="text" name="customerType"
-                       class="layui-input" placeholder="客户类型">
+                       class="layui-input" placeholder="客户类型"
+                       :disabled="disabled">
                 <el-tooltip class="item" effect="pink" :content="errors.first('customerType')" placement="top">
                   <i v-show="errors.has('customerType')" class="el-icon-warning errClass" v-cloak></i>
                 </el-tooltip>
@@ -76,7 +80,8 @@
                 <input v-model="ruleForm.customerName" v-validate="'required'"
                        autocomplete="off"
                        :class="{'input': true, 'is-danger': errors.has('customerName')}" type="text" name="customerName"
-                       class="layui-input" placeholder="客户名称">
+                       class="layui-input" placeholder="客户名称"
+                       :disabled="disabled">
                 <el-tooltip class="item" effect="pink" :content="errors.first('customerName')" placement="top">
                   <i v-show="errors.has('customerName')" class="el-icon-warning errClass" v-cloak></i>
                 </el-tooltip>
@@ -90,7 +95,8 @@
                 <input v-model="ruleForm.person" v-validate="'required'"
                        autocomplete="off"
                        :class="{'input': true, 'is-danger': errors.has('person')}" type="text" name="person"
-                       class="layui-input" placeholder="联系人">
+                       class="layui-input" placeholder="联系人"
+                       :disabled="disabled">
                 <el-tooltip class="item" effect="pink" :content="errors.first('person')" placement="top">
                   <i v-show="errors.has('person')" class="el-icon-warning errClass" v-cloak></i>
                 </el-tooltip>
@@ -104,7 +110,8 @@
                 <input v-model="ruleForm.personPhone" v-validate="'required|phone'"
                        autocomplete="off"
                        :class="{'input': true, 'is-danger': errors.has('personPhone')}" type="text" name="personPhone"
-                       class="layui-input" placeholder="联系电话">
+                       class="layui-input" placeholder="联系电话"
+                       :disabled="disabled">
                 <el-tooltip class="item" effect="pink" :content="errors.first('personPhone')" placement="top">
                   <i v-show="errors.has('personPhone')" class="el-icon-warning errClass" v-cloak></i>
                 </el-tooltip>
@@ -122,7 +129,8 @@
                 <input v-model="ruleForm.address" v-validate="'required'"
                        autocomplete="off"
                        :class="{'input': true, 'is-danger': errors.has('address')}" type="text" name="address"
-                       class="layui-input" placeholder="安装地址">
+                       class="layui-input" placeholder="安装地址"
+                       :disabled="disabled">
                 <el-tooltip class="item" effect="pink" :content="errors.first('address')" placement="top">
                   <i v-show="errors.has('address')" class="el-icon-warning errClass" v-cloak></i>
                 </el-tooltip>
@@ -133,7 +141,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">备注</label>
               <div class="layui-block">
-                <input v-model="ruleForm.remark" class="layui-input" placeholder="备注">
+                <input v-model="ruleForm.remark" class="layui-input" placeholder="备注" :disabled="disabled">
               </div>
             </div>
           </div>
@@ -145,8 +153,8 @@
       </div>
       <div class="order-editor-goods">
         <!--ceshi-->
-        <div v-for="(item, index) in goodsTableHeads" :key="index">
-          <div>
+        <div class="displayFlex" v-for="(item, index) in goodsTableHeads" :key="index">
+          <div class="displayFlex_mode">
             <el-button type="primary" icon="el-icon-plus" circle v-if="index== 0" @click="addGoodsList"></el-button>
             <el-button icon="el-icon-minus" circle v-else @click="delGoodsList(index)"></el-button>
           </div>
@@ -158,7 +166,7 @@
                 <label class="layui-form-label requireClass">{{domain.label}}</label>
                 <div class="layui-block">
                   <select v-model="domain.value" v-validate="'required'" :name="'operator' + index" class="layui-input"
-                          :class="{'input': true, 'is-danger': errors.has('operator' + index)}">
+                          :class="{'input': true, 'is-danger': errors.has('operator' + index)}" :disabled="disabled">
                     <option
                       v-for="item in allUserList"
                       :key="item.id"
@@ -185,6 +193,7 @@
                     :picker-options="pickerOptions1"
                     size="mini"
                     value-format="timestamp"
+                    :disabled="disabled"
                     style="width:100%">
                   </el-date-picker>
                 </div>
@@ -192,7 +201,7 @@
               <div class="layui-form-item" v-else>
                 <label class="layui-form-label">{{domain.label}}</label>
                 <div class="layui-block">
-                  <input v-model="domain.value" type="text" class="layui-input"/>
+                  <input v-model="domain.value" type="text" class="layui-input" :disabled="disabled"/>
                 </div>
               </div>
             </el-form-item>
@@ -380,6 +389,7 @@
         ],
         smsList: [],
         allUserList: [],
+        disabled: false,
         labelName: {
           name: "产品名称",
           model: "型号",
@@ -401,6 +411,11 @@
     mounted () {
       this.multipleSelection = [this.tableData[0], this.tableData[1]]
       this.getAllUser()
+      if (this.$route.params.flag === 'edit') {
+        this.disabled = false
+      } else if (this.$route.params.flag === 'show') {
+        this.disabled = true
+      }
     },
     computed: {
       ...mapState({
@@ -1078,6 +1093,13 @@
   .layui-input[disabled] {
     background: #f2f9ff;
     cursor: not-allowed;
+  }
+  .displayFlex {
+    display: flex;
+    .displayFlex_mode {
+      flex: 1;
+      padding: 5px;
+    }
   }
 
   .cysShowClass {
