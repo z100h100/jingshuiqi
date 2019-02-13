@@ -2,8 +2,8 @@
   <div class="app-container">
     <div style="height: 100%;position: relative;">
       <div class="consignment">
-        <div class="consignmentOpen">运单号：{{orderTrackList.waybillNo}}<span>{{orderTrackList.status | filterStatus(statusList)}} 【邦达通】</span></div>
-        <div class="consignmentTitle">货物托运单</div>
+        <div class="consignmentOpen">订单号：{{orderTrackList.waybillNo}}<span>{{orderTrackList.status | filterStatus(statusList)}} 【邦达通】</span></div>
+        <div class="consignmentTitle">货物托订单</div>
         <div class="consignmentInfo"><span>操作人：{{orderTrackList.operator.username}}</span><span>开单时间：{{dateFormater(orderTrackList.waybillDate, 'YYYY-MM-DD hh:mm:ss')}}</span></div>
       </div>
       <el-table :data="orderTrackList.trackings" v-loading.body="listLoading" element-loading-text="Loading" noborder fit highlight-current-row :height="650">

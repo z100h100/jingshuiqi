@@ -110,5 +110,8 @@ export default {
   },
   GET_CUSTOMERLIST (params) {
     return api.fetch('get', `${base}/customerorder/get`, params)
+  },
+  GET_OPERATIONLIST (params) {
+    return api.fetch('get', `${base}/log/page`, params)
   }
 }

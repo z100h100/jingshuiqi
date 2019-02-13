@@ -6,7 +6,7 @@
       </div>
       <!--<el-form inline ref="form" :model="searchModel" class="header-search">-->
         <!--<el-form-item style="margin-left: 20px">-->
-          <!--<el-input v-model="searchModel.name" placeholder="请输入查单号/运单号"></el-input>-->
+          <!--<el-input v-model="searchModel.name" placeholder="请输入查单号/订单号"></el-input>-->
         <!--</el-form-item>-->
         <!--<el-form-item>-->
           <!--<el-button type="primary" @click="onSubmit">搜索</el-button>-->
@@ -20,7 +20,7 @@
           <div class="p-left">
             <div class="outline-panel">
               <ul>
-                <li><span>运单号:&nbsp;{{orderTrackList.waybillNo}}</span></li>
+                <li><span>订单号:&nbsp;{{orderTrackList.waybillNo}}</span></li>
                 <li><span>发站:&nbsp;{{orderTrackList.departureStation}}</span><span style="margin-left:50px">到站:&nbsp;{{orderTrackList.arriveStation}}</span></li>
                 <li>承运公司:&nbsp;邦达通</li>
                 <li>联系方式:&nbsp;<a>{{orderTrackList.operator.phone}}</a></li>

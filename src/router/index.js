@@ -29,57 +29,76 @@ export const constantRouterMapDefault = [
 ]
 
 export const constantRouterMap = [
-  // 运单管理
+  // 订单管理
   {
     path: '/order',
     component: resolve => require(['@/views/temp'], resolve),
     redirect: '/order/orderList',
     name: 'Order',
-    label: '运单管理',
+    label: '订单管理',
     key: 'Auths_Order',
-    meta: { title: '运单管理', icon: 'edit' },
+    meta: { title: '订单管理', icon: 'edit' },
     children: [
       {
         path: 'orderAdd',
         name: 'orderAdd',
-        label: '创建运单',
+        label: '创建订单',
         parent: 'Order',
         key: 'Auths_OrderAdd',
         component: resolve => require(['@/views/order/orderAdd'], resolve),
-        meta: { title: '创建运单', icon: 'edit' }
+        meta: { title: '创建订单', icon: 'edit' }
       },
       {
         path: 'orderList',
         name: 'orderList',
-        label: '运单列表',
+        label: '订单列表',
         parent: 'Order',
         key: 'Auths_OrderList',
         component: resolve => require(['@/views/order/orderList'], resolve),
-        meta: { title: '运单列表', icon: 'edit' }
+        meta: { title: '订单列表', icon: 'edit' }
       },
       {
         path: 'orderDetail/:id',
         name: 'orderDetail',
-        label: '运单详情',
+        label: '订单详情',
         parent: 'Order',
         key: 'Auths_OrderDetail',
         component: resolve => require(['@/views/order/orderDetail'], resolve),
-        meta: { title: '运单详情', icon: 'delete' },
+        meta: { title: '订单详情', icon: 'delete' },
         hidden: true
       },
       {
         path: 'orderTrack/:id',
         name: 'orderTrack',
-        label: '运单追踪',
+        label: '订单追踪',
         parent: 'Order',
         key: 'Auths_OrderTrack',
         component: resolve => require(['@/views/order/orderTrack'], resolve),
-        meta: { title: '运单追踪', icon: 'delete' },
+        meta: { title: '订单追踪', icon: 'delete' },
         hidden: true
       }
     ]
   },
-  // 表单
+  // 操作记录
+  {
+    path: '/operationList',
+    label: '日志管理',
+    key: 'Auths_Operation',
+    name: 'Operation',
+    meta: { title: '日志管理', icon: 'location' },
+    component: resolve => require(['@/views/temp'], resolve),
+    children: [
+      {
+        path: 'logList',
+        name: 'logList',
+        label: '操作日志',
+        parent: 'Operation',
+        key: 'Auths_LogList',
+        component: resolve => require(['@/views/operation/logList'], resolve),
+        meta: { title: '操作日志', icon: 'edit' }
+      }
+    ]
+  },
   {
     path: '/jurisdiction',
     label: '权限管理',

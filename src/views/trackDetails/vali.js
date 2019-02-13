@@ -26,7 +26,7 @@ const dict = {
   zh_CN: {
     messages: {
       required: (name) => {
-        if (name === 'orderNo') return `运单号不能为空!`
+        if (name === 'orderNo') return `订单号不能为空!`
         if (name === 'area') return `所属地区不能为空!`
         if (name === 'customerType') return `客户类型不能为空!`
         if (name === 'customerName') return `客户名称不能为空!`

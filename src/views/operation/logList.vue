@@ -31,7 +31,7 @@
           <div>{{scope.row.orderNo}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="订单时间" min-width="150" align="center">
+      <el-table-column label="开单时间" min-width="150" align="center">
         <template slot-scope="scope">
           {{scope.row.orderDate ? $moment(scope.row.orderDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
         </template>
@@ -51,12 +51,11 @@
           {{scope.row. personPhone}}
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="110" align="center">
-        <template slot-scope="scope">
-          <el-button type="text" @click="showDetail(scope.row.id)">查看</el-button>
-          <el-button type="text" @click="showDetail(scope.row.id)">修改</el-button>
-        </template>
-      </el-table-column>
+      <!--<el-table-column label="操作" width="110" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--<el-button type="text" @click="showDetail(scope.row.id)">修改</el-button>-->
+        <!--</template>-->
+      <!--</el-table-column>-->
     </el-table>
     <el-pagination
       @size-change="pageSizeChange"
@@ -116,10 +115,10 @@
     computed: {
       ...mapState({
         // 已关联列表
-        orderList: state => state.order.orderList.content,
-        total: state => state.order.orderList.totalElements,
-        pageSize: state => state.order.orderList.size,
-        currentPage: state => state.order.orderList.number + 1,
+        orderList: state => state.operation.orderList.content,
+        total: state => state.operation.orderList.totalElements,
+        pageSize: state => state.operation.orderList.size,
+        currentPage: state => state.operation.orderList.number + 1,
         user: state => state.user.user
       })
     },

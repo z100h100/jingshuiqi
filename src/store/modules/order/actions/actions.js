@@ -10,13 +10,13 @@ export default {
       return response
     })
   },
-  // 添加运单
+  // 添加订单
   getWaybillSave ({ commit }, userInfo) {
     return getDate.GET_WAYBILLSAVE(userInfo).then(response => {
       return response
     })
   },
-  // 查看运单
+  // 查看订单
   getWaybillGet ({ commit }, userInfo) {
     return getDate.GET_WAYBILLGET(userInfo).then(response => {
       const data = response.data.data
@@ -24,7 +24,7 @@ export default {
       return response
     })
   },
-  // 添加运单
+  // 添加订单
   getWaybillSaveTracking ({ commit }, userInfo) {
     return getDate.GET_WAYBILLSAVETRACKING(userInfo).then(response => {
       // const data = response.data.data

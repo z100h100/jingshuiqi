@@ -4,18 +4,18 @@
       <div class="consignment">
         <div class="consignmentOpen">
           <div class="layui-form-item fr">
-            <label class="layui-form-label requireClass">运单号：</label>
+            <label class="layui-form-label requireClass">订单号：</label>
             <div class="layui-block" style="width: 160px">
               <input v-model="name" v-validate="'required|min:3'"
                      :class="{'input': true, 'is-danger': errors.has('name')}" type="text" name="name"
-                     class="layui-input" placeholder="运单号">
+                     class="layui-input" placeholder="订单号">
               <el-tooltip class="item" effect="pink" :content="errors.first('name')" placement="top">
                 <i v-show="errors.has('name')" class="el-icon-warning errClass" v-cloak></i>
               </el-tooltip>
             </div>
           </div>
         </div>
-        <div class="consignmentTitle">货物托运单</div>
+        <div class="consignmentTitle">货物托订单</div>
         <div class="consignmentInfo">
           <el-form-item label="开单时间" prop="waybillDate" class="orderContentRight fr">
             <el-date-picker
@@ -688,7 +688,7 @@
         },
         rules_system: {
           waybillNo: [
-            {required: true, message: '请输入运单号', trigger: 'blur'}
+            {required: true, message: '请输入订单号', trigger: 'blur'}
           ],
           operator: [
             {required: true, message: '请输入经办人', trigger: 'blur'}
@@ -799,14 +799,14 @@
             status: 1,
             messageType: '跟踪-发货人',
             toPerson: '发货人',
-            MSMtemplate: '您好，您发给{收货人}的{货物名称}已受理，运单号{运单号}。查单链接：{短信跟踪链接} {当前组织名称}，电话:{当前组织联系电话}'
+            MSMtemplate: '您好，您发给{收货人}的{货物名称}已受理，订单号{订单号}。查单链接：{短信跟踪链接} {当前组织名称}，电话:{当前组织联系电话}'
           },
           {
             id: 'receiveSms',
             status: 1,
             messageType: '跟踪-收货人',
             toPerson: '收货人',
-            MSMtemplate: '您好，{发货人}发给您的{货物名称}已受理，运单号{运单号}。查单链接：{短信跟踪链接} {当前组织名称}，电话:{当前组织联系电话}'
+            MSMtemplate: '您好，{发货人}发给您的{货物名称}已受理，订单号{订单号}。查单链接：{短信跟踪链接} {当前组织名称}，电话:{当前组织联系电话}'
           }
         ],
         smsList: [],
