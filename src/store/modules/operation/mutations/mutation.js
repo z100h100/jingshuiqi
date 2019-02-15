@@ -4,6 +4,6 @@ import * as types from '../../../mutation_type'
 
 export default {
   [types.GETOPERATIONLIST] (state, res) {
-    state.orderTrackList = res
+    state.logList = res
   }
 }

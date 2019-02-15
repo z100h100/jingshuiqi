@@ -4,7 +4,7 @@ import actions from './actions/actions'
 import mutations from './mutations/mutation'
 
 const state = {
-  orderList: {
+  logList: {
     content: [],
     totalElements: 0,
     size: 10,

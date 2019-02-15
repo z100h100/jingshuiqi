@@ -2,15 +2,12 @@
   <div class="app-container">
     <div>
       <el-form :inline="true" :model="formInline" ref="ruleForm" class="demo-form-inline">
-        <el-form-item label="姓名">
-          <el-input v-model="formInline.person" placeholder="姓名"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号">
-          <el-input v-model="formInline.personPhone" placeholder="手机号"></el-input>
+        <el-form-item label="操作内容">
+          <el-input v-model="formInline.message" placeholder="操作内容"></el-input>
         </el-form-item>
         <el-form-item label="订单日期">
           <el-date-picker
-            v-model="formInline.orderDate"
+            v-model="formInline.createTime"
             type="datetimerange"
             range-separator="至"
             start-placeholder="开始日期"
@@ -26,29 +23,24 @@
     </div>
     <el-table :data="orderList" v-loading.body="listLoading" element-loading-text="Loading" border fit
               highlight-current-row>
-      <el-table-column label="订单号" width="200" align="center">
+      <el-table-column label="操作时间" min-width="150" align="center">
         <template slot-scope="scope">
-          <div>{{scope.row.orderNo}}</div>
+          {{scope.row.createTime ? $moment(scope.row.createTime).format('YYYY-MM-DD hh:mm:ss') : ''}}
         </template>
       </el-table-column>
-      <el-table-column label="开单时间" min-width="150" align="center">
+      <el-table-column label="操作内容" width="150" align="center">
         <template slot-scope="scope">
-          {{scope.row.orderDate ? $moment(scope.row.orderDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
+          {{scope.row.message}}
         </template>
       </el-table-column>
-      <el-table-column label="客户名称" width="150" align="center">
+      <el-table-column label="用户" width="200" align="center">
         <template slot-scope="scope">
-          {{scope.row.customerName}}
+          <div>{{scope.row.operator.username}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="姓名" width="150" align="center">
+      <el-table-column label="手机号" width="200" align="center">
         <template slot-scope="scope">
-          {{scope.row.person}}
-        </template>
-      </el-table-column>
-      <el-table-column label="手机号" width="150" align="center">
-        <template slot-scope="scope">
-          {{scope.row. personPhone}}
+          <div>{{scope.row.operator.phone}}</div>
         </template>
       </el-table-column>
       <!--<el-table-column label="操作" width="110" align="center">-->
@@ -106,19 +98,18 @@
         allUserList: [],
         listLoading: true,
         formInline: {
-          orderDate: this.getSeventDays(),
-          person: '',
-          personPhone: ''
+          createTime: this.getSeventDays(),
+          message: ''
         }
       }
     },
     computed: {
       ...mapState({
         // 已关联列表
-        orderList: state => state.operation.orderList.content,
-        total: state => state.operation.orderList.totalElements,
-        pageSize: state => state.operation.orderList.size,
-        currentPage: state => state.operation.orderList.number + 1,
+        orderList: state => state.operation.logList.content,
+        total: state => state.operation.logList.totalElements,
+        pageSize: state => state.operation.logList.size,
+        currentPage: state => state.operation.logList.number + 1,
         user: state => state.user.user
       })
     },
@@ -128,7 +119,7 @@
     },
     methods: {
       ...mapActions([
-        'getWaybillPage',
+        'getOperationList',
         'getUserAllUser'
       ]),
       showDetail (id) {
@@ -170,37 +161,27 @@
           pageSize,
           params: []
         }
-        if (this.formInline.person) {
+        if (this.formInline.message) {
           params.params.push(
             {
               andOr: "and",
-              name: "person",
+              name: "message",
               operation: "like",
-              value: this.formInline.person
+              value: this.formInline.message
             }
           )
         }
-        if (this.formInline.personPhone) {
+        if (this.formInline.createTime && this.formInline.createTime.length) {
           params.params.push(
             {
               andOr: "and",
-              name: "personPhone",
-              operation: "like",
-              value: this.formInline.personPhone
-            }
-          )
-        }
-        if (this.formInline.orderDate && this.formInline.orderDate.length) {
-          params.params.push(
-            {
-              andOr: "and",
-              name: "orderDate",
+              name: "createTime",
               operation: "between",
-              value: ['#toDate' + new Date(this.formInline.orderDate[0]).getTime(), '#toDate' + new Date(this.formInline.orderDate[1]).getTime()]
+              value: ['#toDate' + new Date(this.formInline.createTime[0]).getTime(), '#toDate' + new Date(this.formInline.createTime[1]).getTime()]
             }
           )
         }
-        this.getWaybillPage(params).then(res => {
+        this.getOperationList(params).then(res => {
           this.listLoading = false
         }).catch(() => {
           this.listLoading = false

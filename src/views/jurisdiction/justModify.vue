@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item label="角色" prop="roles">
         <el-checkbox-group v-model="formInline.roles" size="medium">
-          <el-checkbox v-for="role in justRolesList" :label="role.id" :key="role.id">{{role.name}}</el-checkbox>
+          <el-checkbox v-for="role in justRolesList" :label="role.name" :key="role.id">{{role.name}}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="状态" prop="status">
@@ -71,9 +71,8 @@
             this.formInline.username = resp.data.data.username
             this.formInline.phone = resp.data.data.phone
             this.formInline.status = resp.data.data.status
-            this.formInline.roles = resp.data.data.roles.map(item => {
-              return item.id
-            })
+            this.formInline.version = resp.data.data.version
+            this.formInline.roles = resp.data.data.roles
           })
         }
       })
@@ -109,9 +108,9 @@
               this.$router.push({name: 'justList'})
             })
           } else {
-            return false;
+            return false
           }
-        });
+        })
       }
     }
   }
