@@ -80,10 +80,11 @@
               ...this.formInline,
               actions: []
             }
-            let authsActions = this.$refs.treeAuth.getCheckedKeys().concat(this.$refs.treeAuth.getHalfCheckedKeys())
+            let authsActions = this.$refs.treeAuth.getCheckedNodes().concat(this.$refs.treeAuth.getHalfCheckedNodes())
             params.actions = authsActions.map(item => {
               return {
-                id: item
+                id: item.id,
+                version: item.version
               }
             })
             this.getRoleAuthsSave(params).then(res => {

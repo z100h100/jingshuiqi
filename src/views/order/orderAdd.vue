@@ -147,8 +147,8 @@
         <!--ceshi-->
         <div class="displayFlex" v-for="(item, index) in goodsTableHeads" :key="index">
           <div class="displayFlex_mode">
-            <el-button type="primary" icon="el-icon-plus" circle v-if="index== 0" @click="addGoodsList"></el-button>
-            <el-button icon="el-icon-minus" circle v-else @click="delGoodsList(index)"></el-button>
+            <span class="iconfont icon-plus-circle curPoint" v-if="index== 0" @click="addGoodsList"></span>
+            <span class="iconfont icon-minus-circle curPoint" v-else @click="delGoodsList(index)"></span>
           </div>
           <div class="order-editor-fee">
             <el-form-item

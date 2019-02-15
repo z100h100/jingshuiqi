@@ -10,7 +10,7 @@
                      autocomplete="off"
                      :class="{'input': true, 'is-danger': errors.has('orderNo')}" type="text" name="orderNo"
                      class="layui-input" placeholder="订单编号"
-                     :disabled="disabled">
+                     disabled>
               <el-tooltip class="item" effect="pink" :content="errors.first('orderNo')" placement="top">
                 <i v-show="errors.has('orderNo')" class="el-icon-warning errClass" v-cloak></i>
               </el-tooltip>
@@ -155,8 +155,8 @@
         <!--ceshi-->
         <div class="displayFlex" v-for="(item, index) in goodsTableHeads" :key="index">
           <div class="displayFlex_mode">
-            <el-button type="primary" icon="el-icon-plus" circle v-if="index== 0" @click="addGoodsList"></el-button>
-            <el-button icon="el-icon-minus" circle v-else @click="delGoodsList(index)"></el-button>
+            <span class="iconfont icon-plus-circle curPoint" v-if="index== 0" @click="addGoodsList"></span>
+            <span class="iconfont icon-minus-circle curPoint" v-else @click="delGoodsList(index)"></span>
           </div>
           <div class="order-editor-fee">
             <el-form-item

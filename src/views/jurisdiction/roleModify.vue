@@ -27,6 +27,7 @@
     data() {
       return {
         actions: [],
+        version: '',
         formInline: {
           name: ''
         },
@@ -49,6 +50,7 @@
         this.getRoleAuthsList(params).then(res => {
           this.formInline.name = res.data.data.name
           this.actions = res.data.data.actions
+          this.version = res.data.data.version
           let actionList = res.data.data.actions.map(item => {
             if (item.parentId) {
               return item.id
@@ -77,12 +79,14 @@
             let params = {
               id: parseInt(this.$route.query.id),
               ...this.formInline,
-              actions: []
+              actions: [],
+              version: this.version
             }
-            let authsActions = this.$refs.treeAuth.getCheckedKeys().concat(this.$refs.treeAuth.getHalfCheckedKeys())
+            let authsActions = this.$refs.treeAuth.getCheckedNodes().concat(this.$refs.treeAuth.getHalfCheckedNodes())
             params.actions = authsActions.map(item => {
               return {
-                id: item
+                id: item.id,
+                version: item.version
               }
             })
             this.getRoleAuthsSave(params).then(res => {

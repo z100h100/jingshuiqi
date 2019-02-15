@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import '@/assets/iconfont/iconfont.css'
 import moment from 'moment'
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
 import ElementUI from 'element-ui'
