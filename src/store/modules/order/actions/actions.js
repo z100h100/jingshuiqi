@@ -66,5 +66,10 @@ export default {
     return getDate.GET_CUSTOMERLIST(userInfo).then(response => {
       return response
     })
+  },
+  getCustomerExport ({ commit }, userInfo) {
+    return getDate.GET_CUSTOMERORDEREXPORT(userInfo).then(response => {
+      return response
+    })
   }
 }

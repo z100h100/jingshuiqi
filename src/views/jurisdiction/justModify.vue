@@ -12,7 +12,7 @@
       </el-form-item>
       <el-form-item label="角色" prop="roles">
         <el-checkbox-group v-model="formInline.roles" size="medium">
-          <el-checkbox v-for="role in justRolesList" :label="role.name" :key="role.id">{{role.name}}</el-checkbox>
+          <el-checkbox v-for="role in justRolesList" :label="role.id" :key="role.id" v-if="role.id != 1">{{role.name}}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="状态" prop="status">
@@ -72,7 +72,9 @@
             this.formInline.phone = resp.data.data.phone
             this.formInline.status = resp.data.data.status
             this.formInline.version = resp.data.data.version
-            this.formInline.roles = resp.data.data.roles
+            this.formInline.roles = resp.data.data.roles.map(item => {
+              return item.id
+            })
           })
         }
       })
@@ -93,10 +95,11 @@
         this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let params = Object.assign({}, this.formInline)
+            // 权限转换
             params.roles = this.formInline.roles.map(item => {
-              return {
-                id: item
-              }
+              return this.justRolesList.filter(ele => {
+                return ele.id === item
+              })[0]
             })
             // 判断当前的id
             params.id = this.$route.query.id

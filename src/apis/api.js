@@ -2,6 +2,18 @@ import api from '.'
 import axios from 'axios'
 import store from '../store'
 import { Message } from 'element-ui'
+
+const downloadFilesUrl = url => {
+  var content = url;
+  var elink = document.createElement('a');
+  elink.download = "test.xlsx";
+  elink.style.display = 'none';
+  var blob = new Blob([content]);
+  elink.href = URL.createObjectURL(blob);
+  document.body.appendChild(elink);
+  elink.click();
+  document.body.removeChild(elink)
+}
 /**
  *
  * @type {{}}
@@ -15,6 +27,9 @@ axios.interceptors.request.use(config => {
   return Promise.reject(err)
 })
 axios.interceptors.response.use(response => {
+  if (response.config.url === '/apis/customerorder/export') {
+    downloadFilesUrl(response.data)
+  }
   if (response.data.status == 0) {
     if (response.data.code == '1001') {
       Message.error(response.data.message)
@@ -88,6 +103,9 @@ export default {
   },
   GET_WAYBILLGET (params) {
     return api.fetch('get', `${base}/customerorder/get`, params)
+  },
+  GET_CUSTOMERORDEREXPORT (params) {
+    return api.fetch('post', `${base}/customerorder/export`, params)
   },
   GET_WAYBILLSAVE (params) {
     return api.fetch('post', `${base}/waybill/save`, params)

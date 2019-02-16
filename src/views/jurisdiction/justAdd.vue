@@ -82,6 +82,11 @@
         this.$refs['ruleForm'].validate((valid) => {
           if (valid) {
             let params = Object.assign({}, this.formInline)
+            params.roles = this.formInline.roles.map(item => {
+              return this.justRolesList.filter(ele => {
+                return ele.id === item.id
+              })[0]
+            })
             this.getJustAuthsAdd(params).then(res => {
               this.$message({
                 type: 'success',
