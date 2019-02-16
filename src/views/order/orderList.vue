@@ -21,7 +21,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="fetchData()">查询</el-button>
-          <el-button @click="exportData()">导出</el-button>
+          <el-button @click="exportData">导出</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import { mapState, mapActions } from 'vuex'
   export default {
     data () {
@@ -136,42 +137,49 @@
       ]),
       // 导出接口
       exportData () {
-        let params = {}
-        // let params = {
-        //   params: []
-        // }
-        // if (this.formInline.person) {
-        //   params.params.push(
-        //     {
-        //       andOr: "and",
-        //       name: "person",
-        //       operation: "like",
-        //       value: this.formInline.person
-        //     }
-        //   )
-        // }
-        // if (this.formInline.personPhone) {
-        //   params.params.push(
-        //     {
-        //       andOr: "and",
-        //       name: "personPhone",
-        //       operation: "like",
-        //       value: this.formInline.personPhone
-        //     }
-        //   )
-        // }
-        // if (this.formInline.orderDate && this.formInline.orderDate.length) {
-        //   params.params.push(
-        //     {
-        //       andOr: "and",
-        //       name: "orderDate",
-        //       operation: "between",
-        //       value: ['#toDate' + new Date(this.formInline.orderDate[0]).getTime(), '#toDate' + new Date(this.formInline.orderDate[1]).getTime()]
-        //     }
-        //   )
-        // }
+        let params = {
+          params: []
+        }
+        if (this.formInline.person) {
+          params.params.push(
+            {
+              andOr: "and",
+              name: "person",
+              operation: "like",
+              value: this.formInline.person
+            }
+          )
+        }
+        if (this.formInline.personPhone) {
+          params.params.push(
+            {
+              andOr: "and",
+              name: "personPhone",
+              operation: "like",
+              value: this.formInline.personPhone
+            }
+          )
+        }
+        if (this.formInline.orderDate && this.formInline.orderDate.length) {
+          params.params.push(
+            {
+              andOr: "and",
+              name: "customerOrder.orderDate",
+              operation: "between",
+              value: ['#toDate' + new Date(this.formInline.orderDate[0]).getTime(), '#toDate' + new Date(this.formInline.orderDate[1]).getTime()]
+            }
+          )
+        }
         // 导出方法
-        this.getCustomerExport(params)
+        axios({
+          url: "/apis/customerorder/export",
+          method: 'post',
+          responseType:'blob',
+          data: {
+            ...params
+          }
+        })
+        // this.getCustomerExport(params)
       },
       showDetail (id, flag) {
         this.$router.push({name: 'orderDetail', params: {id: id, flag: flag}})

@@ -13,7 +13,7 @@ Validator.extend('phone', {
 // 件数
 Validator.extend('quantity', {
   getMessage: (field, [args]) => {
-    return `请输入件数`
+    return `请输入正整数`
   },
   validate: value => {
     // 获取输入的value

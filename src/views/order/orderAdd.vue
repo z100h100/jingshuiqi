@@ -195,7 +195,58 @@
                   <input v-model="domain.value" type="text" v-validate="'required'" :name="'name' + index" class="layui-input"
                          :class="{'input': true, 'is-danger': errors.has('name' + index)}"/>
                   <el-tooltip class="item" effect="pink" :content="errors.first('name' + index)" placement="top">
-                    <i v-show="errors.has('name' + index)" class="el-icon-warning errClassSelect" v-cloak></i>
+                    <i v-show="errors.has('name' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <!--价格判断-->
+              <div class="layui-form-item" v-else-if="domain.label === '售价'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'price' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('price' + index)}"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('price' + index)" placement="top">
+                    <i v-show="errors.has('price' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '进价'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'costPrice' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('costPrice' + index)}"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('costPrice' + index)" placement="top">
+                    <i v-show="errors.has('costPrice' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '配件'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'parts' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('parts' + index)}"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('parts' + index)" placement="top">
+                    <i v-show="errors.has('parts' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '人工'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'personCost' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('personCost' + index)}"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('personCost' + index)" placement="top">
+                    <i v-show="errors.has('personCost' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '获利'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'profits' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('profits' + index)}"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('profits' + index)" placement="top">
+                    <i v-show="errors.has('profits' + index)" class="el-icon-warning errClass" v-cloak></i>
                   </el-tooltip>
                 </div>
               </div>

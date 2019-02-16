@@ -3,16 +3,17 @@ import axios from 'axios'
 import store from '../store'
 import { Message } from 'element-ui'
 
-const downloadFilesUrl = url => {
-  var content = url;
-  var elink = document.createElement('a');
-  elink.download = "test.xlsx";
-  elink.style.display = 'none';
-  var blob = new Blob([content]);
-  elink.href = URL.createObjectURL(blob);
-  document.body.appendChild(elink);
-  elink.click();
-  document.body.removeChild(elink)
+const downloadFilesUrl = data => {
+  if (!data) {
+    return
+  }
+  let url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'}))
+  let link = document.createElement('a')
+  link.style.display = 'none'
+  link.href = url
+  link.setAttribute('download', 'excel1111.xlsx')
+  document.body.appendChild(link)
+  link.click()
 }
 /**
  *

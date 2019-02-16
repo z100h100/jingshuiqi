@@ -198,6 +198,56 @@
                   </el-date-picker>
                 </div>
               </div>
+              <div class="layui-form-item" v-else-if="domain.label === '售价'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'price' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('price' + index)}" :disabled="disabled"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('price' + index)" placement="top">
+                    <i v-show="errors.has('price' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '进价'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'costPrice' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('costPrice' + index)}" :disabled="disabled"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('costPrice' + index)" placement="top">
+                    <i v-show="errors.has('costPrice' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '配件'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'parts' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('parts' + index)}" :disabled="disabled"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('parts' + index)" placement="top">
+                    <i v-show="errors.has('parts' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '人工'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'personCost' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('personCost' + index)}" :disabled="disabled"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('personCost' + index)" placement="top">
+                    <i v-show="errors.has('personCost' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
+              <div class="layui-form-item" v-else-if="domain.label === '获利'">
+                <label class="layui-form-label">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'quantity'" :name="'profits' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('profits' + index)}" :disabled="disabled"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('profits' + index)" placement="top">
+                    <i v-show="errors.has('profits' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
               <div class="layui-form-item" v-else>
                 <label class="layui-form-label">{{domain.label}}</label>
                 <div class="layui-block">
@@ -212,8 +262,9 @@
     </el-form>
 
     <div class="footer-Button">
-      <el-button size="mini" @click="MSMNotic">短信通知</el-button>
-      <el-button type="primary" size="mini" @click="submitForm" :loading="btnSaveLoading">保存</el-button>
+      <el-button size="mini" @click="MSMNotic" v-if="!disabled">短信通知</el-button>
+      <el-button type="primary" size="mini" @click="submitForm" :loading="btnSaveLoading" v-if="!disabled">保存</el-button>
+      <el-button type="primary" size="mini" @click="back" :loading="btnSaveLoading">返回</el-button>
     </div>
 
     <el-dialog
@@ -689,6 +740,9 @@
             this.$refs.multipleTable.toggleRowSelection(row, true)
           })
         })
+      },
+      back () {
+        this.$router.push({name: 'orderList'})
       },
       // 提交
       submitForm () {
