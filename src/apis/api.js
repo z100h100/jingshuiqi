@@ -27,7 +27,7 @@ axios.interceptors.request.use(config => {
   return Promise.reject(err)
 })
 axios.interceptors.response.use(response => {
-  if (response.config.url === '/apis/customerorder/export') {
+  if (response.headers && (response.headers['content-type'] === 'application/octet-stream')) {
     downloadFilesUrl(response.data)
   }
   if (response.data.status == 0) {
