@@ -198,6 +198,16 @@
                   </el-date-picker>
                 </div>
               </div>
+              <div class="layui-form-item" v-else-if="domain.label === '产品名称'">
+                <label class="layui-form-label requireClass">{{domain.label}}</label>
+                <div class="layui-block">
+                  <input v-model="domain.value" type="text" v-validate="'required'" :name="'name' + index" class="layui-input"
+                         :class="{'input': true, 'is-danger': errors.has('name' + index)}"/>
+                  <el-tooltip class="item" effect="pink" :content="errors.first('name' + index)" placement="top">
+                    <i v-show="errors.has('name' + index)" class="el-icon-warning errClass" v-cloak></i>
+                  </el-tooltip>
+                </div>
+              </div>
               <div class="layui-form-item" v-else-if="domain.label === '售价'">
                 <label class="layui-form-label">{{domain.label}}</label>
                 <div class="layui-block">
