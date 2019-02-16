@@ -41,7 +41,7 @@
       <div class="title-style">
         <span>客户信息</span>
       </div>
-      <div class="order-content skin-border">
+      <div class="order-content skin-border top-border">
         <div class="order-editor-traffic">
           <div>
             <div class="layui-form-item">
@@ -892,6 +892,7 @@
     border-bottom: 1px solid #78aadd;
     >div {
       flex: 25% 1;
+      padding: 0 6px;
       border-right: 1px solid #78aadd;
       >div {
         display: inline-flex;
@@ -1089,11 +1090,13 @@
     border-right: 1px solid #78aadd;
   }
 
-  .order-content.skin-border {
-    border-top: 1px solid #78aadd;
+  .order-content.skin-border{
     border-left: 1px solid #78aadd;
     border-right: 0;
     background: linear-gradient(270deg, #78aadd 1px, #fff 0);
+    &.top-border {
+      border-top: 1px solid #78aadd;
+    }
   }
 
   .consignment {
