@@ -11,7 +11,7 @@ const downloadFilesUrl = data => {
   let link = document.createElement('a')
   link.style.display = 'none'
   link.href = url
-  link.setAttribute('download', 'excel1111.xlsx')
+  link.setAttribute('download', '订单列表.xlsx')
   document.body.appendChild(link)
   link.click()
 }
@@ -22,6 +22,9 @@ const downloadFilesUrl = data => {
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charest=utf-8'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(config => {
+  if (config.url.indexOf('export') > 0) {
+    config['responseType'] = 'blob'
+  }
   return config
 }, err => {
   Message.error('服务器错误，请重试')

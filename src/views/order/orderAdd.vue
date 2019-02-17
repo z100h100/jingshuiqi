@@ -1098,6 +1098,7 @@
   .layui-form-item {
     margin-right: 5px;
     display: flex;
+    width: 100%;
   }
 
   .layui-label-flex {

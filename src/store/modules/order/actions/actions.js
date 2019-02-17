@@ -27,8 +27,6 @@ export default {
   // 添加订单
   getWaybillSaveTracking ({ commit }, userInfo) {
     return getDate.GET_WAYBILLSAVETRACKING(userInfo).then(response => {
-      // const data = response.data.data
-      // commit(types.GETWAYBILLSAVETRACKING, data)
       return response
     })
   },
@@ -46,7 +44,7 @@ export default {
   },
   getSMS ({ commit }, userInfo) {
     // userInfo = encodeURI(userInfo)
-    console.log(userInfo)
+    // console.log(userInfo)
     return getDate.GET_SMS(userInfo).then(response => {
       return response
     })

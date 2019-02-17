@@ -171,15 +171,15 @@
           )
         }
         // 导出方法
-        axios({
-          url: "/apis/customerorder/export",
-          method: 'post',
-          responseType:'blob',
-          data: {
-            ...params
-          }
-        })
-        // this.getCustomerExport(params)
+        // axios({
+        //   url: "/apis/customerorder/export",
+        //   method: 'post',
+        //   responseType:'blob',
+        //   data: {
+        //     ...params
+        //   }
+        // })
+        this.getCustomerExport(params)
       },
       showDetail (id, flag) {
         this.$router.push({name: 'orderDetail', params: {id: id, flag: flag}})
