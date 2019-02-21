@@ -2,13 +2,16 @@
   <div class="app-container">
     <div>
       <el-form :inline="true" :model="formInline" ref="ruleForm" class="demo-form-inline">
+        <el-form-item label="地区">
+          <el-input v-model="formInline.area" placeholder="地区"></el-input>
+        </el-form-item>
         <el-form-item label="姓名">
           <el-input v-model="formInline.person" placeholder="姓名"></el-input>
         </el-form-item>
         <el-form-item label="手机号">
           <el-input v-model="formInline.personPhone" placeholder="手机号"></el-input>
         </el-form-item>
-        <el-form-item label="订单日期">
+        <el-form-item label="更换日期">
           <el-date-picker
             v-model="formInline.orderDate"
             type="datetimerange"
@@ -32,9 +35,14 @@
           <div>{{scope.row.orderNo}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="订单时间" min-width="150" align="center">
+      <el-table-column label="更换日期" min-width="150" align="center">
         <template slot-scope="scope">
           {{scope.row.orderDate ? $moment(scope.row.orderDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
+        </template>
+      </el-table-column>
+      <el-table-column label="地区" min-width="150" align="center">
+        <template slot-scope="scope">
+          {{scope.row.area}}
         </template>
       </el-table-column>
       <el-table-column label="客户名称" width="150" align="center">
@@ -55,7 +63,7 @@
       <el-table-column label="操作" width="110" align="center">
         <template slot-scope="scope">
           <el-button type="text" @click="showDetail(scope.row.id, 'show')">查看</el-button>
-          <el-button type="text" @click="showDetail(scope.row.id, 'edit')">修改</el-button>
+          <el-button type="text" @click="showDetail(scope.row.id, 'edit')" v-if="isAdmin">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -106,6 +114,7 @@
           }]
         },
         list: null,
+        isAdmin: false,
         allUserList: [],
         listLoading: true,
         formInline: {
@@ -140,11 +149,21 @@
         let params = {
           params: []
         }
+        if (this.formInline.area) {
+          params.params.push(
+            {
+              andOr: "and",
+              name: "area",
+              operation: "like",
+              value: this.formInline.area
+            }
+          )
+        }
         if (this.formInline.person) {
           params.params.push(
             {
               andOr: "and",
-              name: "person",
+              name: "customerOrder.person",
               operation: "like",
               value: this.formInline.person
             }
@@ -154,7 +173,7 @@
           params.params.push(
             {
               andOr: "and",
-              name: "personPhone",
+              name: "customerOrder.personPhone",
               operation: "like",
               value: this.formInline.personPhone
             }
@@ -197,6 +216,11 @@
         this.getUserAllUser().then(res => {
           this.allUserList = res.data.data
           this.formInline.operator = this.user.id
+          this.isAdmin = this.user.roles.some(item => {
+            if (item.id === 1) {
+              return true
+            }
+          })
         })
       },
       /**
@@ -219,6 +243,16 @@
           pageNo,
           pageSize,
           params: []
+        }
+        if (this.formInline.area) {
+          params.params.push(
+            {
+              andOr: "and",
+              name: "area",
+              operation: "like",
+              value: this.formInline.area
+            }
+          )
         }
         if (this.formInline.person) {
           params.params.push(

@@ -25,7 +25,7 @@
     /*justify-content: flex-start;*/
 
     > img {
-      min-width: 1225px;
+      max-width: 1080px;
     }
   }
 </style>
