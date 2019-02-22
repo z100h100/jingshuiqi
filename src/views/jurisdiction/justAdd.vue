@@ -32,6 +32,16 @@
 
   export default {
     data() {
+      var checkPhone = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('请输入电话号码'))
+        }
+        if (/^1[3456789]\d{9}$/.test(value)) {
+          callback()
+        } else {
+          callback(new Error('请输入正确的电话号码'))
+        }
+      }
       return {
         justRolesList: [],
         defaultProps: {
@@ -52,7 +62,7 @@
             { required: true, message: '请输入密码', trigger: 'blur' }
           ],
           phone: [
-            { required: true, message: '请输入电话号码', trigger: 'blur' }
+            { required: true, validator: checkPhone, trigger: 'blur' }
           ],
           roles: [
             { required: true, message: '请选择角色', trigger: 'change' }
