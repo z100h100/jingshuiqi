@@ -25,7 +25,7 @@
               highlight-current-row>
       <el-table-column label="操作时间" width="200" align="center">
         <template slot-scope="scope">
-          {{scope.row.createTime ? $moment(scope.row.createTime).format('YYYY-MM-DD hh:mm:ss') : ''}}
+          {{scope.row.createTime ? $moment(scope.row.createTime).format('YYYY-MM-DD HH:mm:ss') : ''}}
         </template>
       </el-table-column>
       <el-table-column label="操作内容" min-width="150" align="center">

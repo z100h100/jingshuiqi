@@ -34,7 +34,7 @@
         <template slot-scope="scope">
           <div>{{scope.row.orderNo}}</div>
         </template>
-      </el-table-column>
+      </el-table-column>0
       <!--<el-table-column label="更换日期" min-width="150" align="center">-->
         <!--<template slot-scope="scope">-->
           <!--{{scope.row.replaceTime ? $moment(scope.row.replaceTime).format('YYYY-MM-DD hh:mm:ss') : ''}}-->
