@@ -202,7 +202,7 @@
                 <label class="layui-form-label requireClass">{{domain.label}}</label>
                 <div class="layui-block">
                   <input v-model="domain.value" type="text" v-validate="'required'" :name="'name' + index" class="layui-input"
-                         :class="{'input': true, 'is-danger': errors.has('name' + index)}"/>
+                         :class="{'input': true, 'is-danger': errors.has('name' + index)}" disabled/>
                   <el-tooltip class="item" effect="pink" :content="errors.first('name' + index)" placement="top">
                     <i v-show="errors.has('name' + index)" class="el-icon-warning errClass" v-cloak></i>
                   </el-tooltip>

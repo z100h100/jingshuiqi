@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div>
-      <el-form :inline="true" :model="formInline" ref="ruleForm" class="demo-form-inline">
+      <el-form :inline="true" size="small" :model="formInline" ref="ruleForm" class="demo-form-inline">
         <el-form-item label="地区">
           <el-input v-model="formInline.area" placeholder="地区"></el-input>
         </el-form-item>
@@ -13,7 +13,7 @@
         </el-form-item>
         <el-form-item label="更换日期">
           <el-date-picker
-            v-model="formInline.orderDate"
+            v-model="formInline.replaceTime"
             type="datetimerange"
             range-separator="至"
             start-placeholder="开始日期"
@@ -22,7 +22,7 @@
             style="width: 380px">
           </el-date-picker>
         </el-form-item>
-        <el-form-item>
+        <el-form-item style="float: right">
           <el-button type="primary" @click="fetchData()">查询</el-button>
           <el-button @click="exportData">导出</el-button>
         </el-form-item>
@@ -30,34 +30,39 @@
     </div>
     <el-table :data="orderList" v-loading.body="listLoading" element-loading-text="Loading" border fit
               highlight-current-row>
-      <el-table-column label="订单号" width="200" align="center">
+      <el-table-column label="订单号" min-width="200" align="center">
         <template slot-scope="scope">
           <div>{{scope.row.orderNo}}</div>
         </template>
       </el-table-column>
-      <el-table-column label="更换日期" min-width="150" align="center">
-        <template slot-scope="scope">
-          {{scope.row.orderDate ? $moment(scope.row.orderDate).format('YYYY-MM-DD hh:mm:ss') : ''}}
-        </template>
-      </el-table-column>
+      <!--<el-table-column label="更换日期" min-width="150" align="center">-->
+        <!--<template slot-scope="scope">-->
+          <!--{{scope.row.replaceTime ? $moment(scope.row.replaceTime).format('YYYY-MM-DD hh:mm:ss') : ''}}-->
+        <!--</template>-->
+      <!--</el-table-column>-->
       <el-table-column label="地区" min-width="150" align="center">
         <template slot-scope="scope">
           {{scope.row.area}}
         </template>
       </el-table-column>
-      <el-table-column label="客户名称" width="150" align="center">
+      <el-table-column label="客户名称" align="center">
         <template slot-scope="scope">
           {{scope.row.customerName}}
         </template>
       </el-table-column>
-      <el-table-column label="姓名" width="150" align="center">
+      <el-table-column label="姓名" align="center">
         <template slot-scope="scope">
           {{scope.row.person}}
         </template>
       </el-table-column>
-      <el-table-column label="手机号" width="150" align="center">
+      <el-table-column label="手机号" align="center">
         <template slot-scope="scope">
           {{scope.row. personPhone}}
+        </template>
+      </el-table-column>
+      <el-table-column label="产品数量" align="center">
+        <template slot-scope="scope">
+          {{scope.row.products.length}}
         </template>
       </el-table-column>
       <el-table-column label="操作" width="110" align="center">
@@ -118,7 +123,7 @@
         allUserList: [],
         listLoading: true,
         formInline: {
-          orderDate: this.getSeventDays(),
+          replaceTime: this.getSeventDays(),
           person: '',
           personPhone: ''
         }
@@ -153,7 +158,7 @@
           params.params.push(
             {
               andOr: "and",
-              name: "area",
+              name: "customerOrder.area",
               operation: "like",
               value: this.formInline.area
             }
@@ -179,25 +184,17 @@
             }
           )
         }
-        if (this.formInline.orderDate && this.formInline.orderDate.length) {
+        if (this.formInline.replaceTime && this.formInline.replaceTime.length) {
           params.params.push(
             {
               andOr: "and",
-              name: "customerOrder.orderDate",
+              name: "replaceTime",
               operation: "between",
-              value: ['#toDate' + new Date(this.formInline.orderDate[0]).getTime(), '#toDate' + new Date(this.formInline.orderDate[1]).getTime()]
+              value: ['#toDate' + new Date(this.formInline.replaceTime[0]).getTime(), '#toDate' + new Date(this.formInline.replaceTime[1]).getTime()]
             }
           )
         }
         // 导出方法
-        // axios({
-        //   url: "/apis/customerorder/export",
-        //   method: 'post',
-        //   responseType:'blob',
-        //   data: {
-        //     ...params
-        //   }
-        // })
         this.getCustomerExport(params)
       },
       showDetail (id, flag) {
@@ -274,13 +271,13 @@
             }
           )
         }
-        if (this.formInline.orderDate && this.formInline.orderDate.length) {
+        if (this.formInline.replaceTime && this.formInline.replaceTime.length) {
           params.params.push(
             {
               andOr: "and",
-              name: "orderDate",
+              name: "products.replaceTime",
               operation: "between",
-              value: ['#toDate' + new Date(this.formInline.orderDate[0]).getTime(), '#toDate' + new Date(this.formInline.orderDate[1]).getTime()]
+              value: ['#toDate' + new Date(this.formInline.replaceTime[0]).getTime(), '#toDate' + new Date(this.formInline.replaceTime[1]).getTime()]
             }
           )
         }
