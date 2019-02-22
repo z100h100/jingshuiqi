@@ -41,7 +41,7 @@ axios.interceptors.response.use(response => {
       location.reload()
     } else {
       Message.error(response.data.message)
-      return false
+      return Promise.reject()
     }
   }
   return response
