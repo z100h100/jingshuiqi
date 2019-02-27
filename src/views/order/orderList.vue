@@ -86,7 +86,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import { mapState, mapActions } from 'vuex'
   export default {
     data () {
@@ -94,7 +93,7 @@
         pickerOptions: {
           shortcuts: [{
             text: '最近一周',
-            onClick(picker) {
+            onClick (picker) {
               const end = new Date()
               const start = new Date()
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
@@ -102,7 +101,7 @@
             }
           }, {
             text: '最近一个月',
-            onClick(picker) {
+            onClick (picker) {
               const end = new Date()
               const start = new Date()
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
@@ -110,7 +109,7 @@
             }
           }, {
             text: '最近三个月',
-            onClick(picker) {
+            onClick (picker) {
               const end = new Date()
               const start = new Date()
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
@@ -157,9 +156,9 @@
         if (this.formInline.area) {
           params.params.push(
             {
-              andOr: "and",
-              name: "customerOrder.area",
-              operation: "like",
+              andOr: 'and',
+              name: 'customerOrder.area',
+              operation: 'like',
               value: this.formInline.area
             }
           )
@@ -167,9 +166,9 @@
         if (this.formInline.person) {
           params.params.push(
             {
-              andOr: "and",
-              name: "customerOrder.person",
-              operation: "like",
+              andOr: 'and',
+              name: 'customerOrder.person',
+              operation: 'like',
               value: this.formInline.person
             }
           )
@@ -177,9 +176,9 @@
         if (this.formInline.personPhone) {
           params.params.push(
             {
-              andOr: "and",
-              name: "customerOrder.personPhone",
-              operation: "like",
+              andOr: 'and',
+              name: 'customerOrder.personPhone',
+              operation: 'like',
               value: this.formInline.personPhone
             }
           )
@@ -187,9 +186,9 @@
         if (this.formInline.replaceTime && this.formInline.replaceTime.length) {
           params.params.push(
             {
-              andOr: "and",
-              name: "replaceTime",
-              operation: "between",
+              andOr: 'and',
+              name: 'replaceTime',
+              operation: 'between',
               value: ['#toDate' + new Date(this.formInline.replaceTime[0]).getTime(), '#toDate' + new Date(this.formInline.replaceTime[1]).getTime()]
             }
           )
@@ -244,9 +243,9 @@
         if (this.formInline.area) {
           params.params.push(
             {
-              andOr: "and",
-              name: "area",
-              operation: "like",
+              andOr: 'and',
+              name: 'area',
+              operation: 'like',
               value: this.formInline.area
             }
           )
@@ -254,9 +253,9 @@
         if (this.formInline.person) {
           params.params.push(
             {
-              andOr: "and",
-              name: "person",
-              operation: "like",
+              andOr: 'and',
+              name: 'person',
+              operation: 'like',
               value: this.formInline.person
             }
           )
@@ -264,9 +263,9 @@
         if (this.formInline.personPhone) {
           params.params.push(
             {
-              andOr: "and",
-              name: "personPhone",
-              operation: "like",
+              andOr: 'and',
+              name: 'personPhone',
+              operation: 'like',
               value: this.formInline.personPhone
             }
           )
@@ -274,9 +273,9 @@
         if (this.formInline.replaceTime && this.formInline.replaceTime.length) {
           params.params.push(
             {
-              andOr: "and",
-              name: "products.replaceTime",
-              operation: "between",
+              andOr: 'and',
+              name: 'products.replaceTime',
+              operation: 'between',
               value: ['#toDate' + new Date(this.formInline.replaceTime[0]).getTime(), '#toDate' + new Date(this.formInline.replaceTime[1]).getTime()]
             }
           )

@@ -70,7 +70,7 @@
         pickerOptions: {
           shortcuts: [{
             text: '最近一周',
-            onClick(picker) {
+            onClick (picker) {
               const end = new Date()
               const start = new Date()
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
@@ -78,7 +78,7 @@
             }
           }, {
             text: '最近一个月',
-            onClick(picker) {
+            onClick (picker) {
               const end = new Date()
               const start = new Date()
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
@@ -86,7 +86,7 @@
             }
           }, {
             text: '最近三个月',
-            onClick(picker) {
+            onClick (picker) {
               const end = new Date()
               const start = new Date()
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
@@ -164,9 +164,9 @@
         if (this.formInline.message) {
           params.params.push(
             {
-              andOr: "and",
-              name: "message",
-              operation: "like",
+              andOr: 'and',
+              name: 'message',
+              operation: 'like',
               value: this.formInline.message
             }
           )
@@ -174,9 +174,9 @@
         if (this.formInline.createTime && this.formInline.createTime.length) {
           params.params.push(
             {
-              andOr: "and",
-              name: "createTime",
-              operation: "between",
+              andOr: 'and',
+              name: 'createTime',
+              operation: 'between',
               value: ['#toDate' + new Date(this.formInline.createTime[0]).getTime(), '#toDate' + new Date(this.formInline.createTime[1]).getTime()]
             }
           )

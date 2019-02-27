@@ -7,7 +7,7 @@ const downloadFilesUrl = data => {
   if (!data) {
     return
   }
-  let url = window.URL.createObjectURL(new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'}))
+  let url = window.URL.createObjectURL(new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8' }))
   let link = document.createElement('a')
   link.style.display = 'none'
   link.href = url
@@ -41,7 +41,7 @@ axios.interceptors.response.use(response => {
       location.reload()
     } else {
       Message.error(response.data.message)
-      return Promise.reject()
+      return Promise.reject(response.data.message)
     }
   }
   return response

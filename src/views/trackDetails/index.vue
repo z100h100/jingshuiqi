@@ -171,7 +171,7 @@
     },
     computed: {
       ...mapState({
-        orderTrackList: state=> state.order.orderTrackList
+        orderTrackList: state => state.order.orderTrackList
       })
     },
     mounted () {

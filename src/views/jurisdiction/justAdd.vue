@@ -31,7 +31,7 @@
   import { mapActions, mapState } from 'vuex'
 
   export default {
-    data() {
+    data () {
       var checkPhone = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('请输入电话号码'))
@@ -73,7 +73,7 @@
         }
       }
     },
-    mounted() {
+    mounted () {
       this.getAllRole().then(res => {
         this.justRolesList = res.data.data
       })
@@ -105,9 +105,9 @@
               this.$router.push({name: 'justList'})
             })
           } else {
-            return false;
+            return false
           }
-        });
+        })
       }
     }
   }

@@ -40,8 +40,8 @@ export default {
         // password: '123456'
       },
       loginRules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur'}],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+        password: [{required: true, trigger: 'blur', validator: validatePass}]
       },
       loading: false,
       pwdType: 'password'

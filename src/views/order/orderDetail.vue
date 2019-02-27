@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container" style="min-width: 1024px;">
+  <div class="app-container">
     <el-form ref="ruleForm" :model="ruleForm">
       <div class="consignment">
         <div class="consignmentOpen">
@@ -318,87 +318,87 @@
           {
             data: [
               {
-                label: "产品名称",
+                label: '产品名称',
                 placeholder: '',
-                property: "name",
+                property: 'name',
                 value: ''
               },
               {
-                label: "型号",
+                label: '型号',
                 placeholder: '',
-                property: "model",
+                property: 'model',
                 value: ''
               },
               {
-                label: "数量",
+                label: '数量',
                 placeholder: '',
-                property: "number",
+                property: 'number',
                 value: ''
               },
               {
-                label: "安装时间",
+                label: '安装时间',
                 placeholder: '',
-                property: "installTime",
+                property: 'installTime',
                 value: ''
               },
               {
-                label: "更换时间",
+                label: '更换时间',
                 placeholder: '长*宽*高*件数(米)',
-                property: "replaceTime",
+                property: 'replaceTime',
                 value: ''
               },
               {
-                label: "服务类型",
+                label: '服务类型',
                 placeholder: '',
-                property: "serviceType",
+                property: 'serviceType',
                 value: ''
               },
               {
-                label: "售价",
+                label: '售价',
                 placeholder: '',
-                property: "price",
+                property: 'price',
                 value: ''
               },
               {
-                label: "进价",
+                label: '进价',
                 placeholder: '',
-                property: "costPrice",
+                property: 'costPrice',
                 value: ''
               },
               {
-                label: "配件",
+                label: '配件',
                 placeholder: '',
-                property: "parts",
+                property: 'parts',
                 value: ''
               },
               {
-                label: "人工",
+                label: '人工',
                 placeholder: '',
-                property: "personCost",
+                property: 'personCost',
                 value: ''
               },
               {
-                label: "获利",
+                label: '获利',
                 placeholder: '',
-                property: "profits",
+                property: 'profits',
                 value: ''
               },
               {
-                label: "经办人",
+                label: '经办人',
                 placeholder: '',
-                property: "operator",
+                property: 'operator',
                 value: ''
               },
               {
-                label: "维护内容与描述",
+                label: '维护内容与描述',
                 placeholder: '',
-                property: "description",
+                property: 'description',
                 value: ''
               },
               {
-                label: "备注",
+                label: '备注',
                 placeholder: '',
-                property: "remark",
+                property: 'remark',
                 value: ''
               }
             ]
@@ -452,20 +452,20 @@
         allUserList: [],
         disabled: false,
         labelName: {
-          name: "产品名称",
-          model: "型号",
-          number: "数量",
-          installTime: "安装时间",
-          replaceTime: "更换时间",
-          serviceType: "服务类型",
-          price: "售价",
-          costPrice: "进价",
-          parts: "配件",
-          personCost: "人工",
-          profits: "获利",
-          operator: "经办人",
-          description: "维护内容与描述",
-          remark: "备注"
+          name: '产品名称',
+          model: '型号',
+          number: '数量',
+          installTime: '安装时间',
+          replaceTime: '更换时间',
+          serviceType: '服务类型',
+          price: '售价',
+          costPrice: '进价',
+          parts: '配件',
+          personCost: '人工',
+          profits: '获利',
+          operator: '经办人',
+          description: '维护内容与描述',
+          remark: '备注'
         }
       }
     },
@@ -510,7 +510,7 @@
         })
       },
       // 发货人
-      selectValueHandle(value){
+      selectValueHandle (value) {
         this.deliveryPerson = false
         this.ruleForm.deliveryCompany = value.company
         this.ruleForm.deliveryPerson = value.person
@@ -527,7 +527,7 @@
         })
       },
       // 收货人
-      selectReceivingValueHandle(value){
+      selectReceivingValueHandle (value) {
         this.receivingPerson = false
         this.ruleForm.receivingCompany = value.company
         this.ruleForm.receivingPerson = value.person
@@ -544,7 +544,7 @@
         })
       },
       // 承运商
-      selectCysValueHandle(value){
+      selectCysValueHandle (value) {
         this.cys = false
         this.ruleForm.cys = value.person
         this.ruleForm.cyssjh = value.phone
@@ -562,87 +562,87 @@
         this.goodsTableHeads.push({
           data: [
             {
-              label: "产品名称",
+              label: '产品名称',
               placeholder: '',
-              property: "name",
+              property: 'name',
               value: ''
             },
             {
-              label: "型号",
+              label: '型号',
               placeholder: '',
-              property: "model",
+              property: 'model',
               value: ''
             },
             {
-              label: "数量",
+              label: '数量',
               placeholder: '',
-              property: "number",
+              property: 'number',
               value: ''
             },
             {
-              label: "安装时间",
+              label: '安装时间',
               placeholder: '',
-              property: "installTime",
+              property: 'installTime',
               value: ''
             },
             {
-              label: "更换时间",
+              label: '更换时间',
               placeholder: '长*宽*高*件数(米)',
-              property: "replaceTime",
+              property: 'replaceTime',
               value: ''
             },
             {
-              label: "服务类型",
+              label: '服务类型',
               placeholder: '',
-              property: "serviceType",
+              property: 'serviceType',
               value: ''
             },
             {
-              label: "售价",
+              label: '售价',
               placeholder: '',
-              property: "price",
+              property: 'price',
               value: ''
             },
             {
-              label: "进价",
+              label: '进价',
               placeholder: '',
-              property: "costPrice",
+              property: 'costPrice',
               value: ''
             },
             {
-              label: "配件",
+              label: '配件',
               placeholder: '',
-              property: "parts",
+              property: 'parts',
               value: ''
             },
             {
-              label: "人工",
+              label: '人工',
               placeholder: '',
-              property: "personCost",
+              property: 'personCost',
               value: ''
             },
             {
-              label: "获利",
+              label: '获利',
               placeholder: '',
-              property: "profits",
+              property: 'profits',
               value: ''
             },
             {
-              label: "经办人",
+              label: '经办人',
               placeholder: '',
-              property: "operator",
+              property: 'operator',
               value: ''
             },
             {
-              label: "维护内容与描述",
+              label: '维护内容与描述',
               placeholder: '',
-              property: "description",
+              property: 'description',
               value: ''
             },
             {
-              label: "备注",
+              label: '备注',
               placeholder: '',
-              property: "remark",
+              property: 'remark',
               value: ''
             }
           ]
@@ -720,7 +720,6 @@
       },
       selectStatus (selection) {
         this.multipleSelection = selection
-        let aa = []
         if (selection.length == 1) {
           selection.map(v => {
             this.tableData.map(item => {
@@ -741,7 +740,6 @@
           })
         }
         this.smsList = this.tableData
-        // console.log(this.tableData)
       },
       MSMNotic () {
         this.dialogVisible = true
